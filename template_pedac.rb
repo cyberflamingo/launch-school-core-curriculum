@@ -95,8 +95,18 @@ Note: Rules for a specific problem are oftentimes an excellent place to find
 test cases. If you're working with collections, it's a good idea to find test
 cases that deal with zero, one or multiple elements in the collection.
 Try to provide test cases that handle any edge cases you can find.
-If you're working with collections, it's a good idea to find test cases that
-deal with zero, one or multiple elements in the collection.
+
+Find test cases with the following conditions:
+* Zero (0)
+* Emptiness (nil/null, "", [], {})
+* Boundary conditions (where conditions change)
+* Repetition / duplication
+* upper case / lower case
+* Data types
+
+As well as the following failurs and bad inputs:
+* Raise exceptions / report errors
+* Special values (nil, 0, "", surrogate pairs, char. encoding, special char.)
 
 *Your Test Cases:*
 
