@@ -13,9 +13,9 @@ def messages(message, lang='en')
   MESSAGES[lang][message]
 end
 
-def prompt(key)
+def prompt(key, var)
   message = messages(key, LANGUAGE)
-  Kernel.puts("=> #{message}")
+  Kernel.puts(format("=> #{message}", value: var))
 end
 
 def integer?(val)
@@ -47,52 +47,51 @@ def operation_to_message(op)
               'op4'
             end
 
-  op_word
+  messages(op_word, LANGUAGE)
 end
 
-prompt('welcome')
+prompt('welcome', '')
 
 name = ''
 loop do
   name = Kernel.gets().chomp
 
   if name.empty?()
-    prompt('valid_name')
+    prompt('valid_name', '')
   else
     break
   end
 end
 
-prompt('greating')
-puts " #{name}!"
+prompt('greating', name)
 
 loop do # main loop
   number1 = ''
   loop do
-    prompt('number_1')
+    prompt('number_1', '')
     number1 = Kernel.gets().chomp()
 
     if number?(number1)
       break
     else
-      prompt('number_error')
+      prompt('number_error', '')
     end
   end
 
   number2 = ''
   loop do
-    prompt('number_2')
+    prompt('number_2', '')
     number2 = Kernel.gets().chomp()
 
     if number?(number2)
       break
     else
-      prompt('number_error')
+      prompt('number_error', '')
     end
   end
 
   # Should remove 4) if number2 is 0
-  prompt('operator_prompt')
+  prompt('operator_prompt', '')
 
   operator = ''
   loop do
@@ -101,35 +100,28 @@ loop do # main loop
     if %w(1 2 3 4).include?(operator)
       break
     else
-      prompt('operator_error')
+      prompt('operator_error', '')
     end
   end
 
-  if LANGUAGE == 'ja'
-    prompt('operation_message')
-    prompt(operation_to_message(operator))
-  else
-    prompt(operation_to_message(operator))
-    prompt('operation_message')
-  end
+  prompt('operation_message', operation_to_message(operator))
 
   result = case operator
            when '1'
-             number1.to_i() + number2.to_i()
+             number1.to_f() + number2.to_f()
            when '2'
-             number1.to_i() - number2.to_i()
+             number1.to_f() - number2.to_f()
            when '3'
-             number1.to_i() * number2.to_i()
+             number1.to_f() * number2.to_f()
            when '4'
              number1.to_f() / number2.to_f()
            end
 
-  prompt('result')
-  puts result.to_s
+  prompt('result', result.to_s)
 
-  prompt('again')
+  prompt('again', '')
   answer = Kernel.gets().chomp()
   break unless answer.downcase().start_with?('y')
 end
 
-prompt('thanks')
+prompt('thanks', '')

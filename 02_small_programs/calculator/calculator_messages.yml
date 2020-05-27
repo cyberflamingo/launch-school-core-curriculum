@@ -1,7 +1,7 @@
 en:
   welcome: 'Welcome to Calculator! Enter your name:'
   valid_name: 'Make sure to use a valid name.'
-  greating: "Hi"
+  greating: 'Hi %{value}'
   number_1: "What's the first Number?"
   number_2: "What's the second Number?"
   number_error: "Hmm... that doesn't look like a valid number"
@@ -13,18 +13,18 @@ en:
     4) divide"
   operator_error: 'Must choose 1, 2, 3 or 4'
   operation_to_message:
-    1: 'Adding'
-    2: 'Substracting'
-    3: 'Multiplying'
-    4: 'Dividing'
-  operation_message: "the two numbers..."
-  result: "The result is "
+    op1: 'Adding'
+    op2: 'Substracting'
+    op3: 'Multiplying'
+    op4: 'Dividing'
+  operation_message: "%{value} the two numbers..."
+  result: "The result is %{value}"
   again: 'Do you want to form another calculation? (Y to continue)'
   thanks: 'Thank you for using the calculator. Good bye!'
 ja:
   welcome: '計算機へようこそ!お名前をご入力ください:'
   valid_name: '正しい名前をご入力ください。'
-  greating: "こんにちは、"
+  greating: "こんにちは、 %{value}"
   number_1: "一つ目の数字は何ですか?"
   number_2: "二つ目の数字は何ですか?"
   number_error: "うーむ。正しい数字に見えません。"
@@ -39,7 +39,7 @@ ja:
   op2: '引いている'
   op3: 'かけている'
   op4: '割っている'
-  operation_message: "二つの数字を"
-  result: "結果は"
+  operation_message: "二つの数字を %{value}"
+  result: "結果は %{value}"
   again: 'もう一度計算しますか?(Y で続ける)'
   thanks: '計算機をお使いいただきありがとうございました!ご機嫌よう!'
