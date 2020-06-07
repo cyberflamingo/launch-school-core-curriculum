@@ -1,3 +1,5 @@
+require 'pry'
+
 VALID_CHOICES = %w(rock paper scissors lizard Spock)
 
 def test_method
@@ -12,6 +14,16 @@ end
 
 # test_method
 
+def find_associated_string(letter)
+  return false if letter == '' || letter.nil?
+
+  associated_string = VALID_CHOICES.select do |choice|
+    choice[0] == letter
+  end
+
+  associated_string[0]
+end
+
 def display_results(player, computer)
   pattern = [player, computer]
   winning_patterns = [['scissors', 'paper'], ['paper', 'rock'],
@@ -23,14 +35,17 @@ def display_results(player, computer)
 
   return 'You won!' if winning_patterns.include?(pattern)
   return 'Computer won!' if loosing_patterns.include?(pattern)
-  "NEW It's a tie!"
+  "It's a tie!"
 end
 
 loop do
   choice = ''
   loop do
-    prompt("Choose one: #{VALID_CHOICES.join(', ')}")
-    choice = Kernel.gets().chomp()
+    prompt("Choose one by typing its first letter ('S' majuscule for " \
+           "Spock): #{VALID_CHOICES.join(', ')}")
+    raw_choice = Kernel.gets().chomp()
+
+    choice = find_associated_string(raw_choice[0])
 
     if VALID_CHOICES.include?(choice)
       break
