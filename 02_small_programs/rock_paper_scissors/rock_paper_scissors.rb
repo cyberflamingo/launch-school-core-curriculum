@@ -21,9 +21,9 @@ def display_results(player, computer)
                       ['paper', 'scissors'],
                       ['scissors', 'rock']]
 
-  return 'NEW You won!' if winning_patterns.include?(pattern)
-  return 'NEW Computer won!' if loosing_patterns.include?(pattern)
-  "NEW It's a tie!"
+  return 'You won!' if winning_patterns.include?(pattern)
+  return 'Computer won!' if loosing_patterns.include?(pattern)
+  "It's a tie!"
 end
 
 loop do
