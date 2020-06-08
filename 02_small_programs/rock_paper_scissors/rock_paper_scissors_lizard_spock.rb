@@ -1,18 +1,8 @@
-require 'pry'
-
 VALID_CHOICES = %w(rock paper scissors lizard Spock)
-
-def test_method
-  prompt('test message')
-end
-
-# test_method
 
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
-
-# test_method
 
 def find_associated_string(letter)
   return false if letter == '' || letter.nil?
