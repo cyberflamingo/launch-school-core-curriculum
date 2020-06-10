@@ -7,5 +7,8 @@ tip_percentage = gets.to_f
 tip = bill * (tip_percentage / 100)
 total = bill + tip
 
-puts "The tip is $#{tip.round(2)}"
-puts "The total is $#{total.round(2)}"
+tip = "%.2f" % tip
+total = "%.2f" % total
+
+puts "The tip is $#{tip}"
+puts "The total is $#{total}"
