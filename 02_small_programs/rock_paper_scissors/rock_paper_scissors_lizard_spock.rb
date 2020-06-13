@@ -1,4 +1,3 @@
-require 'pry'
 VALID_CHOICES = %w(rock paper scissors lizard Spock)
 WINNING_PATTERNS = [['scissors', 'paper'], ['paper', 'rock'],
                     ['rock', 'lizard'], ['lizard', 'Spock'],
