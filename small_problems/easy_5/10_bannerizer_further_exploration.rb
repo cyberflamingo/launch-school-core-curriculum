@@ -97,25 +97,45 @@ $MAIN
 1. $MULTILINE_ARRAY Save string of 76 characters or less in an array of strings
 2. Find the longest string in the array of strings and add 2 to make the box
    length `box_l`
-3. $PRINT_BOX
+3. Define horizontal_rule
+4. Define empty_line
+5. Iterate over multiline to get each line of the string
 
 $MULTILINE_ARRAY
 1. Split the strings in an array of words
 2. Create a line counter `i`
 3. Iterate over the array
   1. If the current line (String) is nil, initialize it
-  2. If the line + word length is more than 76, increment i and initialize the
-     new line
+  2. If the line + word length is more than 76, increment `i` and initialize
+     the new line
   3. Add word and a space to current line
-4. Iterate over the `multiline` array and strip trailing spaces
-5. Return `multiline` array
+4. Iterate over the `multiline`
+5. Batton touch to $UNIFY
 
-$PRINT_BOX
-1.
+$UNIFY
+1. Strips trailing spaces for each line of the array
+2. Find `longest_line`
+3. Add spaces for line which are shorter than `longest_line`
+4. Return unified array
 
 == Code
 
 =end
+
+def unify_line_size(multiline_arr)
+  multiline_arr.each(&:strip!)
+
+  longest_line = multiline_arr.max do |a, b|
+    a.length <=> b.length
+  end
+
+  multiline_arr.each do |line|
+    diff = longest_line.size - line.size
+    line << ' ' * diff
+  end
+
+  multiline_arr
+end
 
 def create_multiline_array(long_str)
   multiline = ['']
@@ -131,18 +151,7 @@ def create_multiline_array(long_str)
     multiline[i] += word + ' '
   end
 
-  multiline.each(&:strip!)
-
-  longest_line = multiline.max do |a, b|
-    a.length <=> b.length
-  end
-
-  multiline.each do |line|
-    diff = longest_line.size - line.size
-    line << ' ' * diff
-  end
-
-  multiline
+  unify_line_size(multiline)
 end
 
 def print_in_box(message)
