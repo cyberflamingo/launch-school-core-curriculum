@@ -70,6 +70,22 @@ def initialize_board
   new_board
 end
 
+def joinor(arr, separator = ', ', last_separator = 'or')
+  return arr[0] if arr.size == 1
+
+  joined_str = arr.join(separator)
+  first_separator_position = joined_str.index(separator)
+  last_separator_position = joined_str.rindex(separator)
+
+  if first_separator_position != last_separator_position
+    joined_str[last_separator_position + 1] = " #{last_separator} "
+  else
+    joined_str[last_separator_position] = " #{last_separator}"
+  end
+
+  joined_str
+end
+
 def empty_squares(brd)
   brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
@@ -78,7 +94,7 @@ def player_places_piece!(brd)
   square = ''
 
   loop do
-    prompt "Choose a square(#{empty_squares(brd).join(', ')}):"
+    prompt "Choose a square (#{joinor(empty_squares(brd))}):"
     square = gets.chomp.to_i
     break if empty_squares(brd).include?(square)
     prompt "Sorry that's not a valid choice."
