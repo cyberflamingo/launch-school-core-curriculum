@@ -37,7 +37,7 @@ INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
-                [[1, 5, 7], [2, 5, 8], [3, 6, 9]] + # cols
+                [[1, 4, 7], [2, 5, 8], [3, 6, 9]] + # cols
                 [[1, 5, 9], [3, 5, 7]]              # diagonals
 
 def prompt(msg)
@@ -47,7 +47,7 @@ end
 # rubocop:disable Metrics/AbcSize
 def display_board(brd)
   system 'clear'
-  puts "You're a #{PLAYER_MARKER}. Cimputer is #{COMPUTER_MARKER}."
+  puts "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}"
@@ -129,6 +129,24 @@ def detect_winner(brd)
   nil
 end
 
+def keep_score(score, winner_name)
+  score[winner_name] += 1
+end
+
+def detect_grand_winner(score)
+  if score['Player'] == 5
+    'Player'
+  elsif score['Computer'] == 5
+    'Computer'
+  end
+end
+
+def grand_winner?(score)
+  !!detect_grand_winner(score)
+end
+
+total_score = { 'Player' => 0, 'Computer' => 0 }
+
 loop do
   board = initialize_board
 
@@ -145,14 +163,23 @@ loop do
   display_board(board)
 
   if someone_won?(board)
-    prompt "#{detect_winner(board)} won!"
+    prompt "#{detect_winner(board)} won this round!"
+    keep_score(total_score, detect_winner(board))
   else
     prompt "It's a tie!"
   end
 
-  prompt "Play again? (y or n)"
-  answer = gets.chomp
-  break unless answer.downcase.start_with?('y')
+  if grand_winner?(total_score)
+    prompt "#{detect_grand_winner(total_score)} won this game!"
+    break
+  else
+    puts "Current score:"
+    puts "You: #{total_score['Player']}, Computer: #{total_score['Computer']}"
+
+    prompt "Play again? (y or n)"
+    answer = gets.chomp
+    break unless answer.downcase.start_with?('y')
+  end
 end
 
 prompt "Thanks for playing Tic Tac Toe! Good bye!"
