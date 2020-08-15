@@ -33,6 +33,8 @@ A hash
 
 =end
 
+require 'pry'
+
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
@@ -105,6 +107,19 @@ end
 
 def computer_places_piece!(brd)
   square = empty_squares(brd).sample
+
+  WINNING_LINES.each do |line|
+    tictactoe = brd.values_at(*line)
+
+    if (tictactoe.count(PLAYER_MARKER) == 2) &&
+       (tictactoe.count(INITIAL_MARKER) == 1)
+
+      empty_square = tictactoe.index { |n| n == INITIAL_MARKER }
+      square = line.at(empty_square)
+      break
+    end
+  end
+
   brd[square] = COMPUTER_MARKER
 end
 
@@ -170,7 +185,8 @@ loop do
   end
 
   if grand_winner?(total_score)
-    prompt "#{detect_grand_winner(total_score)} won this game!"
+    prompt "#{detect_grand_winner(total_score)} won this game! " \
+           "Congratulations!"
     break
   else
     puts "Current score:"
