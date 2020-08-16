@@ -47,6 +47,42 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
+def joinor(arr, separator = ', ', last_separator = 'or')
+  return arr[0] if arr.size == 1
+
+  joined_str = arr.join(separator)
+  first_separator_position = joined_str.index(separator)
+  last_separator_position = joined_str.rindex(separator)
+
+  if first_separator_position != last_separator_position
+    joined_str[last_separator_position + 1] = " #{last_separator} "
+  else
+    joined_str[last_separator_position] = " #{last_separator}"
+  end
+
+  joined_str
+end
+
+def initialize_board
+  new_board = {}
+  (1..9).each { |num| new_board[num] = INITIAL_MARKER }
+  new_board
+end
+
+def choose_first_move
+  first_move = ''
+  valid_choices = [PLAYER, COMPUTER]
+
+  loop do
+    prompt "Choose a first player (Computer or Player):"
+    first_move = gets.chomp.downcase
+    break if valid_choices.include?(first_move)
+    prompt "Sorry that's not a valid choice."
+  end
+
+  first_move
+end
+
 # rubocop:disable Metrics/AbcSize
 def display_board(brd)
   system 'clear'
@@ -67,43 +103,22 @@ def display_board(brd)
 end
 # rubocop:enable Metrics/AbcSize
 
-def initialize_board
-  new_board = {}
-  (1..9).each { |num| new_board[num] = INITIAL_MARKER }
-  new_board
-end
-
-def joinor(arr, separator = ', ', last_separator = 'or')
-  return arr[0] if arr.size == 1
-
-  joined_str = arr.join(separator)
-  first_separator_position = joined_str.index(separator)
-  last_separator_position = joined_str.rindex(separator)
-
-  if first_separator_position != last_separator_position
-    joined_str[last_separator_position + 1] = " #{last_separator} "
-  else
-    joined_str[last_separator_position] = " #{last_separator}"
+def place_piece!(brd, player)
+  case player
+  when 'computer'
+    computer_places_piece!(brd)
+  when 'player'
+    player_places_piece!(brd)
   end
-
-  joined_str
 end
 
-def empty_squares(brd)
-  brd.keys.select { |num| brd[num] == INITIAL_MARKER }
-end
+def computer_places_piece!(brd)
+  square = offensive_strategy(brd)
+  square ||= defensive_strategy(brd)
+  square ||= empty_squares(brd).select { |n| n == 5 }.first
+  square ||= empty_squares(brd).sample
 
-def player_places_piece!(brd)
-  square = ''
-
-  loop do
-    prompt "Choose a square (#{joinor(empty_squares(brd))}):"
-    square = gets.chomp.to_i
-    break if empty_squares(brd).include?(square)
-    prompt "Sorry that's not a valid choice."
-  end
-
-  brd[square] = PLAYER_MARKER
+  brd[square] = COMPUTER_MARKER
 end
 
 def offensive_strategy(brd)
@@ -140,17 +155,30 @@ def defensive_strategy(brd)
   square
 end
 
-def computer_places_piece!(brd)
-  square = offensive_strategy(brd)
-  square ||= defensive_strategy(brd)
-  square ||= empty_squares(brd).select { |n| n == 5 }.first
-  square ||= empty_squares(brd).sample
-
-  brd[square] = COMPUTER_MARKER
+def empty_squares(brd)
+  brd.keys.select { |num| brd[num] == INITIAL_MARKER }
 end
 
-def board_full?(brd)
-  empty_squares(brd).empty?
+def player_places_piece!(brd)
+  square = ''
+
+  loop do
+    prompt "Choose a square (#{joinor(empty_squares(brd))}):"
+    square = gets.chomp.to_i
+    break if empty_squares(brd).include?(square)
+    prompt "Sorry that's not a valid choice."
+  end
+
+  brd[square] = PLAYER_MARKER
+end
+
+def alternate_player(current_player)
+  case current_player
+  when 'computer'
+    PLAYER
+  when 'player'
+    COMPUTER
+  end
 end
 
 def someone_won?(brd)
@@ -170,8 +198,16 @@ def detect_winner(brd)
   nil
 end
 
+def board_full?(brd)
+  empty_squares(brd).empty?
+end
+
 def keep_score!(score, winner_name)
   score[winner_name] += 1
+end
+
+def grand_winner?(score)
+  !!detect_grand_winner(score)
 end
 
 def detect_grand_winner(score)
@@ -179,42 +215,6 @@ def detect_grand_winner(score)
     PLAYER
   elsif score[COMPUTER] == 5
     COMPUTER
-  end
-end
-
-def grand_winner?(score)
-  !!detect_grand_winner(score)
-end
-
-def choose_first_move
-  first_move = ''
-  valid_choices = [PLAYER, COMPUTER]
-
-  loop do
-    prompt "Choose a first player (Computer or Player):"
-    first_move = gets.chomp.downcase
-    break if valid_choices.include?(first_move)
-    prompt "Sorry that's not a valid choice."
-  end
-
-  first_move
-end
-
-def alternate_player(current_player)
-  case current_player
-  when 'computer'
-    PLAYER
-  when 'player'
-    COMPUTER
-  end
-end
-
-def place_piece!(brd, player)
-  case player
-  when 'computer'
-    computer_places_piece!(brd)
-  when 'player'
-    player_places_piece!(brd)
   end
 end
 
