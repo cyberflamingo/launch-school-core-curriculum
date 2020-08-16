@@ -105,29 +105,51 @@ def player_places_piece!(brd)
   brd[square] = PLAYER_MARKER
 end
 
-def risky_lines(line, brd)
-  tictactoe = brd.values_at(*line)
+def offensive_strategy(brd)
+  square = nil
 
-  if (tictactoe.count(PLAYER_MARKER) == 2) &&
-     (tictactoe.count(INITIAL_MARKER) == 1)
+  WINNING_LINES.each do |line|
+    tictactoe = brd.values_at(*line)
 
-    empty_square = tictactoe.index { |n| n == INITIAL_MARKER }
-    line.at(empty_square)
+    if (tictactoe.count(COMPUTER_MARKER) == 2) &&
+       (tictactoe.count(INITIAL_MARKER) == 1)
+
+      empty_square = tictactoe.index { |n| n == INITIAL_MARKER }
+      square = line.at(empty_square)
+    end
   end
+
+  square
+end
+
+def defensive_strategy(brd)
+  square = nil
+
+  WINNING_LINES.each do |line|
+    tictactoe = brd.values_at(*line)
+
+    if (tictactoe.count(PLAYER_MARKER) == 2) &&
+       (tictactoe.count(INITIAL_MARKER) == 1)
+
+      empty_square = tictactoe.index { |n| n == INITIAL_MARKER }
+      square = line.at(empty_square)
+    end
+  end
+
+  square
 end
 
 def computer_places_piece!(brd)
   square = nil
 
-  WINNING_LINES.each do |line|
-    square = risky_lines(line, brd)
-
+  while square.nil?
+    square = defensive_strategy(brd)
     break if square
+    square = offensive_strategy(brd)
+    break
   end
 
   square.nil? ? square = empty_squares(brd).sample : square
-
-  binding.pry
   brd[square] = COMPUTER_MARKER
 end
 
@@ -179,7 +201,6 @@ loop do
     player_places_piece!(board)
     break if someone_won?(board) || board_full?(board)
 
-#    binding.pry
     computer_places_piece!(board)
     break if someone_won?(board) || board_full?(board)
   end
