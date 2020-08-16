@@ -33,8 +33,6 @@ A hash
 
 =end
 
-require 'pry'
-
 FIRST_MOVE = 'choose' # 'player', 'computer', 'choose'
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
@@ -200,48 +198,39 @@ def choose_first_move
   first_move
 end
 
+def alternate_player(current_player)
+  case current_player
+  when 'computer'
+    'player'
+  when 'player'
+    'computer'
+  end
+end
+
+def place_piece!(brd, player)
+  case player
+  when 'computer'
+    computer_places_piece!(brd)
+  when 'player'
+    player_places_piece!(brd)
+  end
+end
+
 total_score = { 'Player' => 0, 'Computer' => 0 }
 
 loop do
-  first_move = nil
   board = initialize_board
+  current_player = if FIRST_MOVE == 'choose'
+                     choose_first_move
+                   else
+                     FIRST_MOVE
+                   end
 
   loop do
     display_board(board)
-
-    if FIRST_MOVE == 'player'
-      player_places_piece!(board)
-      break if someone_won?(board) || board_full?(board)
-
-      computer_places_piece!(board)
-      break if someone_won?(board) || board_full?(board)
-    elsif FIRST_MOVE == 'computer'
-      computer_places_piece!(board)
-      display_board(board)
-      break if someone_won?(board) || board_full?(board)
-
-      player_places_piece!(board)
-      break if someone_won?(board) || board_full?(board)
-    else
-      if !first_move
-        first_move = choose_first_move
-      end
-
-      if first_move == 'player'
-        player_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-
-        computer_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-      elsif first_move == 'computer'
-        computer_places_piece!(board)
-        display_board(board)
-        break if someone_won?(board) || board_full?(board)
-
-        player_places_piece!(board)
-        break if someone_won?(board) || board_full?(board)
-      end
-    end
+    place_piece!(board, current_player)
+    current_player = alternate_player(current_player)
+    break if someone_won?(board) || board_full?(board)
   end
 
   display_board(board)
@@ -258,8 +247,9 @@ loop do
            "Congratulations!"
     break
   else
-    puts "Current score:"
-    puts "You: #{total_score['Player']}, Computer: #{total_score['Computer']}"
+    prompt "Current score:"
+    prompt "You: #{total_score['Player']}, " \
+           "Computer: #{total_score['Computer']}"
 
     prompt "Play again? (y or n)"
     answer = gets.chomp
