@@ -35,6 +35,7 @@ A hash
 
 require 'pry'
 
+FIRST_MOVE = 'choose' # 'player', 'computer', 'choose'
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
@@ -140,16 +141,11 @@ def defensive_strategy(brd)
 end
 
 def computer_places_piece!(brd)
-  square = nil
+  square = offensive_strategy(brd)
+  square ||= defensive_strategy(brd)
+  square ||= empty_squares(brd).select { |n| n == 5 }.first
+  square ||= empty_squares(brd).sample
 
-  while square.nil?
-    square = defensive_strategy(brd)
-    break if square
-    square = offensive_strategy(brd)
-    break
-  end
-
-  square.nil? ? square = empty_squares(brd).sample : square
   brd[square] = COMPUTER_MARKER
 end
 
@@ -190,19 +186,62 @@ def grand_winner?(score)
   !!detect_grand_winner(score)
 end
 
+def choose_first_move
+  first_move = ''
+  valid_choices = ['computer', 'player']
+
+  loop do
+    prompt "Choose a first player (Computer or Player):"
+    first_move = gets.chomp.downcase
+    break if valid_choices.include?(first_move)
+    prompt "Sorry that's not a valid choice."
+  end
+
+  first_move
+end
+
 total_score = { 'Player' => 0, 'Computer' => 0 }
 
 loop do
+  first_move = nil
   board = initialize_board
 
   loop do
     display_board(board)
 
-    player_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
+    if FIRST_MOVE == 'player'
+      player_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
 
-    computer_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
+      computer_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+    elsif FIRST_MOVE == 'computer'
+      computer_places_piece!(board)
+      display_board(board)
+      break if someone_won?(board) || board_full?(board)
+
+      player_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+    else
+      if !first_move
+        first_move = choose_first_move
+      end
+
+      if first_move == 'player'
+        player_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+
+        computer_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+      elsif first_move == 'computer'
+        computer_places_piece!(board)
+        display_board(board)
+        break if someone_won?(board) || board_full?(board)
+
+        player_places_piece!(board)
+        break if someone_won?(board) || board_full?(board)
+      end
+    end
   end
 
   display_board(board)
