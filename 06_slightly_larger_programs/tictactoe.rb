@@ -237,7 +237,7 @@ loop do
 
   if someone_won?(board)
     prompt "#{detect_winner(board)} won this round!"
-    keep_score(total_score, detect_winner(board))
+    keep_score!(total_score, detect_winner(board))
   else
     prompt "It's a tie!"
   end
