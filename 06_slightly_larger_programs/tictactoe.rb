@@ -33,7 +33,9 @@ A hash
 
 =end
 
-FIRST_MOVE = 'choose' # 'player', 'computer', 'choose'
+PLAYER = 'player'
+COMPUTER = 'computer'
+FIRST_MOVE = 'choose' # PLAYER, COMPUTER, 'choose'
 INITIAL_MARKER = ' '
 PLAYER_MARKER = 'X'
 COMPUTER_MARKER = 'O'
@@ -160,23 +162,23 @@ def detect_winner(brd)
     tictactoe = brd.values_at(*line)
 
     if tictactoe.count(PLAYER_MARKER) == 3
-      return 'Player'
+      return PLAYER
     elsif tictactoe.count(COMPUTER_MARKER) == 3
-      return 'Computer'
+      return COMPUTER
     end
   end
   nil
 end
 
-def keep_score(score, winner_name)
+def keep_score!(score, winner_name)
   score[winner_name] += 1
 end
 
 def detect_grand_winner(score)
-  if score['Player'] == 5
-    'Player'
-  elsif score['Computer'] == 5
-    'Computer'
+  if score[PLAYER] == 5
+    PLAYER
+  elsif score[COMPUTER] == 5
+    COMPUTER
   end
 end
 
@@ -186,7 +188,7 @@ end
 
 def choose_first_move
   first_move = ''
-  valid_choices = ['computer', 'player']
+  valid_choices = [PLAYER, COMPUTER]
 
   loop do
     prompt "Choose a first player (Computer or Player):"
@@ -201,9 +203,9 @@ end
 def alternate_player(current_player)
   case current_player
   when 'computer'
-    'player'
+    PLAYER
   when 'player'
-    'computer'
+    COMPUTER
   end
 end
 
@@ -216,7 +218,7 @@ def place_piece!(brd, player)
   end
 end
 
-total_score = { 'Player' => 0, 'Computer' => 0 }
+total_score = { PLAYER => 0, COMPUTER => 0 }
 
 loop do
   board = initialize_board
@@ -236,20 +238,20 @@ loop do
   display_board(board)
 
   if someone_won?(board)
-    prompt "#{detect_winner(board)} won this round!"
+    prompt "#{detect_winner(board).capitalize} won this round!"
     keep_score!(total_score, detect_winner(board))
   else
     prompt "It's a tie!"
   end
 
   if grand_winner?(total_score)
-    prompt "#{detect_grand_winner(total_score)} won this game! " \
+    prompt "#{detect_grand_winner(total_score).capitalize} won this game! " \
            "Congratulations!"
     break
   else
     prompt "Current score:"
-    prompt "You: #{total_score['Player']}, " \
-           "Computer: #{total_score['Computer']}"
+    prompt "You: #{total_score[PLAYER]}, " \
+           "Computer: #{total_score[COMPUTER]}"
 
     prompt "Play again? (y or n)"
     answer = gets.chomp
