@@ -124,6 +124,7 @@ $PRINT
 == Code
 
 =end
+require 'pry'
 
 def register_n(operation)
   operation
@@ -212,3 +213,9 @@ minilang('-3 PUSH 5 SUB PRINT')
 
 minilang('6 PUSH')
 # (nothing printed; no PRINT commands)
+
+# Furher Exploration
+# (3 + (4 * 5) - 7) / (5 % 3) = 8
+# (      16       ) /    2    = 8
+minilang('PUSH 3 PUSH 5 MOD PUSH 3 PUSH 4 PUSH 5 MULT PUSH -7 ADD ADD DIV ' \
+         'PRINT')
