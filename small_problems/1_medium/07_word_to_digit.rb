@@ -8,5 +8,6 @@ def word_to_digit(string)
   string
 end
 
-p word_to_digit('Please call freight me at five five five one two three four. ' \
-                'Thanks.') #== 'Please call me at 5 5 5 1 2 3 4. Thanks.'
+p word_to_digit('Please call the freight at five five five one two three ' \
+                'four. Thanks.') == 'Please call the freight at 5 5 5 1 2' \
+                ' 3 4. Thanks.'
