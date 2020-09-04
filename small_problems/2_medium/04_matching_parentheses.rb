@@ -1,9 +1,23 @@
-def balanced?(string)
-  opening_parenthesis = string.chars.count { |char| char =~ /\(/ }
-  closing_parenthesis = string.chars.count { |char| char =~ /\)/ }
+def mismatch?(parenthesis)
+  parenthesis[:opening] < parenthesis[:closing]
+end
 
-  return true if opening_parenthesis == 0 && closing_parenthesis == 0
-  opening_parenthesis == closing_parenthesis && string.include?(/\(.*\)/.to_s)
+def balanced?(string)
+  parenthesis = { opening: 0, closing: 0 }
+  mismatch = false
+
+  string.chars.each do |char|
+    case char
+    when '(' then parenthesis[:opening] += 1
+    when ')' then parenthesis[:closing] += 1
+    end
+
+    mismatch = mismatch?(parenthesis)
+    break if mismatch
+  end
+
+  return false if parenthesis[:opening] != parenthesis[:closing]
+  !mismatch
 end
 
 p balanced?('What (is) this?') == true
