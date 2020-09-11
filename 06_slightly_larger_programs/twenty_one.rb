@@ -88,12 +88,34 @@ $DISPLAY_RESULT
 == Code
 
 =end
+
 SUIT = { 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8,
          9 => 9, 10 => 10, :jack => 10, :queen => 10, :ace => nil }
 CARDS = SUIT.keys
+# Constants below can be changed to update game experience
 BUST = 21
 DEALER_LIMIT = 17
 GOAL = 5
+
+def greeting
+  system 'clear'
+  puts "Howdy! Welcome to Twenty One!\n\n"
+
+  puts "Your goal is to try to get as close to #{BUST} as possible,\n" \
+       "without going over. If you go over #{BUST}, you lose. :-(\n\n"
+
+  puts "Just remember this easy rules:\n" \
+       "- Cards 2 to 10 are worth their face value.\n" \
+       "- Jack, Queen and King are worth 10.\n" \
+       "- Ace is worth 11 or 1 if your total score exceed #{BUST}.\n\n"
+
+  puts "You will play against the Dealer. In order to be the Grand\n" \
+       "Winner, you shall beat the game #{GOAL} times before the Dealer!\n" \
+       "Good luck!\n\n"
+
+  puts "-------------"
+  puts "\n"
+end
 
 def initialize_deck
   hearts = SUIT.dup
@@ -131,13 +153,13 @@ end
 
 def player_turn(dealer_hand, player_hand, deck)
   loop do
-    system 'clear'
     display_dealer_first_card(dealer_hand)
     display_hand(player_hand, 'You')
     puts 'hit or stay?'
     answer = gets.chomp
     player_hand += draw_cards(deck, 1) if answer == 'hit'
     break if answer == 'stay' || busted?(player_hand)
+    system 'clear'
   end
 
   system 'clear'
@@ -292,6 +314,8 @@ end
 score_board = { dealer: 0,
                 player: 0 }
 
+greeting
+
 loop do
   winner = twenty_one
   score_board = keep_score(winner, score_board)
@@ -303,6 +327,7 @@ loop do
   puts "Player current score is #{score_board[:player]}."
 
   break unless play_again?
+  system 'clear'
 end
 
 puts "Thank you for playing Twenty-One! Good bye!"
