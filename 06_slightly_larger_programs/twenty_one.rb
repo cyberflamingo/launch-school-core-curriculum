@@ -88,12 +88,12 @@ $DISPLAY_RESULT
 == Code
 
 =end
-require 'pry'
 SUIT = { 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8,
          9 => 9, 10 => 10, :jack => 10, :queen => 10, :ace => nil }
 CARDS = SUIT.keys
 BUST = 21
 DEALER_LIMIT = 17
+GOAL = 5
 
 def initialize_deck
   hearts = SUIT.dup
@@ -204,46 +204,105 @@ def busted?(hand)
   score > BUST
 end
 
+# rubocop:disable Metrics/MethodLength
 def comparing_cards(dealer_hand, player_hand)
+  winner = nil
   dealer_score = calculate_score(dealer_hand)
   player_score = calculate_score(player_hand)
 
   if dealer_score > player_score
     puts "Dealer wins with #{dealer_score}!"
     puts "Your score is #{player_score}."
+    winner = :dealer
   elsif dealer_score < player_score
     puts "You win with #{player_score}!\n"
     puts "Dealer's score is #{dealer_score}."
+    winner = :player
   else
     puts "It's a tie!"
     puts "Dealer: #{dealer_score}"
     puts "Player: #{player_score}"
   end
+
+  winner
 end
 
-# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
 def twenty_one
   deck = initialize_deck
   dealer_hand = draw_cards(deck, 2)
   player_hand = draw_cards(deck, 2)
   new_player_hand = player_turn(dealer_hand, player_hand, deck)
   new_dealer_hand = dealer_turn(dealer_hand, deck)
+  winner = nil
 
   if busted?(new_player_hand)
     puts "You busted hard! Your hand's score is " \
          "#{calculate_score(new_player_hand)}!"
+    new_dealer_hand = dealer_hand
+    winner = :dealer
   elsif busted?(new_dealer_hand)
     puts "Dealer busted! Dealer's hand's score is " \
          "#{calculate_score(new_dealer_hand)}!"
+    winner = :player
   else
     system 'clear'
-    comparing_cards(new_dealer_hand, new_player_hand)
+    winner = comparing_cards(new_dealer_hand, new_player_hand)
   end
 
   puts "\n"
   display_hand(new_dealer_hand, 'Dealer')
   display_hand(new_player_hand, 'You')
-end
-# rubocop:enable Metrics/MethodLength
 
-twenty_one
+  winner
+end
+# rubocop:enable Metrics/MethodLength, Metrics/AbcSize
+
+def play_again?
+  puts "\n"
+  puts "-------------"
+  puts "Do you want to play again? (y or n)"
+  answer = gets.chomp
+  answer.downcase.start_with?('y')
+end
+
+def keep_score(winner, score_board)
+  score_board[winner].nil? ? score_board : score_board[winner] += 1
+
+  score_board
+end
+
+def grand_winner?(score_board)
+  puts "\n"
+  puts "-------------"
+
+  if score_board[:dealer] == GOAL
+    puts "Dealer is the grand winner and the first to reach #{GOAL}!"
+    puts "Player's final score is #{score_board[:player]}."
+    true
+  elsif score_board[:player] == GOAL
+    puts "Player is the grand winner and the first to reach #{GOAL}!"
+    puts "Dealer's final score is #{score_board[:dealer]}."
+    true
+  else
+    false
+  end
+end
+
+score_board = { dealer: 0,
+                player: 0 }
+
+loop do
+  winner = twenty_one
+  score_board = keep_score(winner, score_board)
+
+  break if grand_winner?(score_board)
+
+  puts "\n"
+  puts "Dealer current score is #{score_board[:dealer]}."
+  puts "Player current score is #{score_board[:player]}."
+
+  break unless play_again?
+end
+
+puts "Thank you for playing Twenty-One! Good bye!"
