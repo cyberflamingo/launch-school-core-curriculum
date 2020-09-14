@@ -130,27 +130,31 @@ def display_dealer_first_card(dealer_hand)
   puts "Dealer has: #{dealer_hand[0]} and unknown card."
 end
 
-def display_hand(hand, subject)
+def build_display_hand(hand)
   hand_size = hand.size
-  have = ''
+  hand_string = ''
   i = 0
 
   while i <= hand_size - 1
-    have << if i == hand_size - 1
-              hand[i].to_s
-            elsif i == hand_size - 2
-              hand[i].to_s + ' and '
-            else
-              hand[i].to_s + ', '
-            end
+    hand_string << if i == hand_size - 1
+                     hand[i].to_s
+                   elsif i == hand_size - 2
+                     hand[i].to_s + ' and '
+                   else
+                     hand[i].to_s + ', '
+                   end
 
     i += 1
   end
 
-  puts "#{subject} have: #{have}."
+  hand_string
 end
 
-def player_turn(dealer_hand, player_hand, deck)
+def display_hand(hand, subject)
+  puts "#{subject} have: #{build_display_hand(hand)}."
+end
+
+def player_hand_refinement(dealer_hand, player_hand, deck)
   loop do
     answer = ''
     system 'clear'
@@ -171,7 +175,7 @@ def player_turn(dealer_hand, player_hand, deck)
   player_hand
 end
 
-def dealer_turn(hand, deck)
+def dealer_hand_refinement(hand, deck)
   while calculate_score(hand) < DEALER_LIMIT
     hand += draw_cards(deck, 1)
   end
@@ -331,8 +335,8 @@ loop do
   deck = initialize_deck
   dealer_hand = draw_cards(deck, 2)
   player_hand = draw_cards(deck, 2)
-  final_player_hand = player_turn(dealer_hand, player_hand, deck)
-  final_dealer_hand = dealer_turn(dealer_hand, deck)
+  final_player_hand = player_hand_refinement(dealer_hand, player_hand, deck)
+  final_dealer_hand = dealer_hand_refinement(dealer_hand, deck)
 
   system 'clear'
   winner = find_winner(final_dealer_hand, final_player_hand)
