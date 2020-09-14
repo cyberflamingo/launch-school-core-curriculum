@@ -88,7 +88,6 @@ $DISPLAY_RESULT
 == Code
 
 =end
-
 SUIT = { 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6, 7 => 7, 8 => 8,
          9 => 9, 10 => 10, :jack => 10, :queen => 10, :ace => nil }
 CARDS = SUIT.keys
@@ -154,7 +153,7 @@ end
 def player_turn(dealer_hand, player_hand, deck)
   loop do
     answer = ''
-
+    system 'clear'
     display_dealer_first_card(dealer_hand)
     display_hand(player_hand, 'You')
     puts '(h)it or (s)tay?'
@@ -168,8 +167,6 @@ def player_turn(dealer_hand, player_hand, deck)
     player_hand += draw_cards(deck, 1) if answer.downcase.start_with?('h')
     break if answer.downcase.start_with?('s') || busted?(player_hand)
   end
-
-  system 'clear'
 
   player_hand
 end
@@ -200,6 +197,10 @@ end
 
 def calculate_aces(hand)
   aces = hand.count(nil)
+  # Add zero to array to prevent exception
+  # NoMethodError: undefined method `+' for nil:NilClass
+  # when hand = [nil, nil] at hand.compact.reduce(:+) + 11
+  hand.unshift(0)
 
   aces.times do
     hand << (hand.compact.reduce(:+) + 11 <= BUST ? 11 : 1)
@@ -233,59 +234,56 @@ def busted?(hand)
   score > BUST
 end
 
-# rubocop:disable Metrics/MethodLength
-def comparing_cards(dealer_hand, player_hand)
-  winner = nil
-  dealer_score = calculate_score(dealer_hand)
-  player_score = calculate_score(player_hand)
+def display_busted(hand, busted_player)
+  puts "#{busted_player} busted hard! #{busted_player} hand's score is " \
+       "#{calculate_score(hand)}!"
+end
 
-  if dealer_score > player_score
+def display_winner(dealer_score, player_score, winner)
+  case winner
+  when :dealer
     puts "Dealer wins with #{dealer_score}!"
     puts "Your score is #{player_score}."
-    winner = :dealer
-  elsif dealer_score < player_score
+  when :player
     puts "You win with #{player_score}!\n"
     puts "Dealer's score is #{dealer_score}."
-    winner = :player
   else
     puts "It's a tie!"
     puts "Dealer: #{dealer_score}"
     puts "Player: #{player_score}"
   end
-
-  winner
 end
 
-# rubocop:disable Metrics/AbcSize
-def twenty_one
-  deck = initialize_deck
-  dealer_hand = draw_cards(deck, 2)
-  player_hand = draw_cards(deck, 2)
-  new_player_hand = player_turn(dealer_hand, player_hand, deck)
-  new_dealer_hand = dealer_turn(dealer_hand, deck)
+def comparing_cards(dealer_score, player_score)
   winner = nil
 
-  if busted?(new_player_hand)
-    puts "You busted hard! Your hand's score is " \
-         "#{calculate_score(new_player_hand)}!"
-    new_dealer_hand = dealer_hand
+  if dealer_score > player_score
     winner = :dealer
-  elsif busted?(new_dealer_hand)
-    puts "Dealer busted! Dealer's hand's score is " \
-         "#{calculate_score(new_dealer_hand)}!"
+  elsif dealer_score < player_score
     winner = :player
-  else
-    system 'clear'
-    winner = comparing_cards(new_dealer_hand, new_player_hand)
   end
-
-  puts "\n"
-  display_hand(new_dealer_hand, 'Dealer')
-  display_hand(new_player_hand, 'You')
 
   winner
 end
-# rubocop:enable Metrics/MethodLength, Metrics/AbcSize
+
+def find_winner(dealer_hand, player_hand)
+  winner = nil
+
+  if busted?(player_hand)
+    display_busted(player_hand, "You")
+    winner = :dealer
+  elsif busted?(dealer_hand)
+    display_busted(player_hand, "Dealer")
+    winner = :player
+  else
+    dealer_score = calculate_score(dealer_hand)
+    player_score = calculate_score(player_hand)
+    winner = comparing_cards(dealer_score, player_score)
+    display_winner(dealer_score, player_score, winner)
+  end
+
+  winner
+end
 
 def play_again?
   answer = ''
@@ -330,7 +328,20 @@ score_board = { dealer: 0,
 greeting
 
 loop do
-  winner = twenty_one
+  deck = initialize_deck
+  dealer_hand = draw_cards(deck, 2)
+  player_hand = draw_cards(deck, 2)
+  final_player_hand = player_turn(dealer_hand, player_hand, deck)
+  final_dealer_hand = dealer_turn(dealer_hand, deck)
+
+  system 'clear'
+  winner = find_winner(final_dealer_hand, final_player_hand)
+
+  puts "\n"
+  final_dealer_hand = dealer_hand if busted?(player_hand)
+  display_hand(final_dealer_hand, 'Dealer')
+  display_hand(final_player_hand, 'You')
+
   score_board = keep_score(winner, score_board)
 
   break if grand_winner?(score_board)
