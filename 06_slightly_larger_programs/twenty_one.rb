@@ -153,13 +153,20 @@ end
 
 def player_turn(dealer_hand, player_hand, deck)
   loop do
+    answer = ''
+
     display_dealer_first_card(dealer_hand)
     display_hand(player_hand, 'You')
-    puts 'hit or stay?'
-    answer = gets.chomp
-    player_hand += draw_cards(deck, 1) if answer == 'hit'
-    break if answer == 'stay' || busted?(player_hand)
-    system 'clear'
+    puts '(h)it or (s)tay?'
+
+    loop do
+      answer = gets.chomp
+      break if answer.downcase.start_with?('h', 's')
+      puts "Sorry, I didn't understand that. Please input (h)it or (s)tay."
+    end
+
+    player_hand += draw_cards(deck, 1) if answer.downcase.start_with?('h')
+    break if answer.downcase.start_with?('s') || busted?(player_hand)
   end
 
   system 'clear'
@@ -281,10 +288,16 @@ end
 # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
 def play_again?
+  answer = ''
+
   puts "\n"
   puts "-------------"
-  puts "Do you want to play again? (y or n)"
-  answer = gets.chomp
+  puts "Do you want to play again? ('y' or 'n')"
+  loop do
+    answer = gets.chomp
+    break if answer.downcase.start_with?('y', 'n')
+    puts "Sorry, I didn't understand that. Please input 'y' or 'n'"
+  end
   answer.downcase.start_with?('y')
 end
 
