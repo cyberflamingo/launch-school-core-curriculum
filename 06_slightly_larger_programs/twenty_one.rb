@@ -347,7 +347,7 @@ loop do
   winner = find_winner(final_dealer_hand, final_player_hand)
 
   puts "\n"
-  final_dealer_hand = dealer_hand if busted?(player_hand)
+  final_dealer_hand = dealer_hand if busted?(final_player_hand)
   display_hand(final_dealer_hand, 'Dealer')
   display_hand(final_player_hand, 'You')
 
