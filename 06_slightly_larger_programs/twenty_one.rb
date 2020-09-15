@@ -272,7 +272,7 @@ def display_winner(dealer_score, player_score, winner)
   end
 end
 
-def comparing_cards(dealer_score, player_score)
+def compare_cards(dealer_score, player_score)
   winner = nil
 
   if dealer_score > player_score
@@ -296,7 +296,7 @@ def find_winner(dealer_hand, player_hand)
   else
     dealer_score = calculate_score(dealer_hand)
     player_score = calculate_score(player_hand)
-    winner = comparing_cards(dealer_score, player_score)
+    winner = compare_cards(dealer_score, player_score)
     display_winner(dealer_score, player_score, winner)
   end
 
