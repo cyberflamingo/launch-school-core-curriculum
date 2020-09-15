@@ -154,19 +154,25 @@ def display_hand(hand, subject)
   puts "#{subject} have: #{build_display_hand(hand)}."
 end
 
+def player_answer
+  answer = ''
+  puts '(h)it or (s)tay?'
+
+  loop do
+    answer = gets.chomp
+    break if answer.downcase.start_with?('h', 's')
+    puts "Sorry, I didn't understand that. Please input (h)it or (s)tay."
+  end
+
+  answer
+end
+
 def player_hand_refinement(dealer_hand, player_hand, deck)
   loop do
-    answer = ''
     system 'clear'
     display_dealer_first_card(dealer_hand)
     display_hand(player_hand, 'You')
-    puts '(h)it or (s)tay?'
-
-    loop do
-      answer = gets.chomp
-      break if answer.downcase.start_with?('h', 's')
-      puts "Sorry, I didn't understand that. Please input (h)it or (s)tay."
-    end
+    answer = player_answer
 
     player_hand += draw_cards(deck, 1) if answer.downcase.start_with?('h')
     break if answer.downcase.start_with?('s') || busted?(player_hand)
@@ -218,11 +224,14 @@ def calculate_aces(hand)
   hand.compact
 end
 
-def calculate_score(hand)
-  numeric_hand = hand.map do |card|
+def convert_hand_to_numeric(hand)
+  hand.map do |card|
     SUIT[card]
   end
+end
 
+def calculate_score(hand)
+  numeric_hand = convert_hand_to_numeric(hand)
   reduced_hand = calculate_aces(numeric_hand)
   score = 0
 
