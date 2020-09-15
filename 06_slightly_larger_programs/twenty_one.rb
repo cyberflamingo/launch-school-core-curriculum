@@ -282,7 +282,7 @@ def find_winner(dealer_hand, player_hand)
     display_busted(player_hand, "You")
     winner = :dealer
   elsif busted?(dealer_hand)
-    display_busted(player_hand, "Dealer")
+    display_busted(dealer_hand, "Dealer")
     winner = :player
   else
     dealer_score = calculate_score(dealer_hand)
