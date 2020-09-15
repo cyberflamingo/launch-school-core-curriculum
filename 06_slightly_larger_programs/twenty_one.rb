@@ -210,6 +210,11 @@ def calculate_aces(hand)
     hand << (hand.compact.reduce(:+) + 11 <= BUST ? 11 : 1)
   end
 
+  # Remove added zero to prevent exception
+  # TypeError: nil can't be coerced into Integer
+  # down the road at SUIT[card]
+  hand.shift
+
   hand.compact
 end
 
