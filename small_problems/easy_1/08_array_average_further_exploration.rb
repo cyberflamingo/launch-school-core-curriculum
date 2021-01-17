@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -47,25 +45,25 @@ Array
 == Algorithm
 
 *Your Algorith:*
-1. Create a new integer sum
-2. Iterate over the given array.
-  1. Sum each number
-3. Divise the sum by the length of the array
-4. Return result
+
+. Sum all integers of the given array
+. Dvide by the length of the given array
+. Return the result
 
 == Code
 
 =end
 
-def average(ary)
+def average(numbers)
   sum = 0.0
 
-  ary.each do |num|
+  numbers.each do |num|
     sum += num
   end
 
-  sum / ary.length
+  sum / numbers.length
 end
 
-puts average([1, 5, 87, 45, 8, 8]) #== 25
-puts average([9, 47, 23, 95, 16, 52]) #== 40
+puts average([1, 6]) == 3.5 # integer division: (1 + 6) / 2 -> 3
+puts average([1, 5, 87, 45, 8, 8]) == 25.666666666666668
+puts average([9, 47, 23, 95, 16, 52]) == 40.333333333333336

@@ -1,9 +1,5 @@
-# frozen_string_literal: true
-
-def is_odd?(int)
-  return true if int % 2 != 0
-
-  false
+def is_odd?(num)
+  num % 2 == 1
 end
 
 puts is_odd?(2)    # => false

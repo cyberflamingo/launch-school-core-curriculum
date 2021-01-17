@@ -1,6 +1,4 @@
-# frozen_string_literal: false
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -64,30 +62,33 @@ Array
 == Algorithm
 
 *Your Algorith:*
-1. Create a new array
-2. Iterate the number of time defined by the given integer.
-  1. If the number is even, push 1, otherwise 0
-3. If the optional argument is set to 0, pop the last
-value in the array and prepend 0.
 
+. Create a new local variable of string object
+. Iterate the number of time defined by the given integer
+  . If the number is even, mutate the string with 1, otherwise 0
+. If the lead is 0, slice the last value and prepend '0'
+. Return the string
 == Code
 
 =end
 
-def stringy(size, lead = 1)
-  numbers = []
+def stringy(num, lead = 1)
+  binary_string = String.new
 
-  size.times do |index|
-    number = index.even? ? 1 : 0
-    numbers << number
+  num.times do |index|
+    binary_string << if index.even?
+                       '1'
+                     else
+                       '0'
+                     end
   end
 
   if lead.zero?
-    numbers.pop
-    numbers.prepend(lead)
+    binary_string.slice!(-1)
+    binary_string.prepend(lead.to_s)
   end
 
-  numbers.join
+  binary_string
 end
 
 puts stringy(6) == '101010'

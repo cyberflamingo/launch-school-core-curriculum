@@ -1,11 +1,5 @@
-# frozen_string_literal: true
-
-def digit_list(int)
-  num_ary = int.to_s.split('')
-
-  num_ary.map! do |num|
-    num.to_i
-  end
+def digit_list(num)
+  num.to_s.split('').map(&:to_i)
 end
 
 puts digit_list(12_345) == [1, 2, 3, 4, 5]     # => true

@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -57,16 +55,16 @@ Array
 == Algorithm
 
 *Your Algorith:*
-Split the string by spaces and create an array of every word.
-Reverse iterate over the array and print each word.
+
+. Split the given string by spaces and reverse the resulting array
+. Join the new array by spaces and return
 
 == Code
 
 =end
 
-def reverse_sentence(str)
-  str_ary = str.split(' ')
-  str_ary.reverse.join(' ')
+def reverse_sentence(sentence)
+  sentence.split.reverse.join(' ')
 end
 
 puts reverse_sentence('') == ''

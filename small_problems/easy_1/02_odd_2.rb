@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 def is_odd?(int)
   int.abs % 2 == 1
 end

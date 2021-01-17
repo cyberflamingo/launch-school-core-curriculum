@@ -1,6 +1,4 @@
-# frozen_string_literal: false
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -62,26 +60,28 @@ String
 == Algorithm
 
 *Your Algorith:*
-1. Create a new string
-2. Iterate the number of time defined by the given integer.
-  1. If the number is even, mutate the string with 1, otherwise 0
-3. Return the string
+
+. Create a new local variable of string object
+. Iterate the number of time defined by the given integer
+  . If the number is even, mutate the string with 1, otherwise 0
+. Return the string
 
 == Code
 
 =end
 
 def stringy(num)
-  stringy = ''
+  binary_string = String.new
 
-  num.times do |i|
-    stringy << if i.even?
-                 '1'
-               else
-                 '0'
-               end
+  num.times do |index|
+    binary_string << if index.even?
+                       '1'
+                     else
+                       '0'
+                     end
   end
-  stringy
+
+  binary_string
 end
 
 puts stringy(6) == '101010'

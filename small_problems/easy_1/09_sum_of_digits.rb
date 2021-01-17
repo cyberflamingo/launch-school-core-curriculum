@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -51,17 +49,16 @@ Array
 == Algorithm
 
 *Your Algorith:*
-1. Make an array containing each digits of the given integer
-2. Return the sum  of them all
+
+. Stringify and split the given number
+. Re-turn each string into integer in the new array and sum them
 
 == Code
 
 =end
 
-def sum(num)
-  digits = num.to_s.split('')
-
-  digits.reduce { |sum, n| sum.to_i + n.to_i }
+def sum(number)
+  number.to_s.chars.map(&:to_i).sum
 end
 
 puts sum(23) == 5

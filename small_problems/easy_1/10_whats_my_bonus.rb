@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -53,8 +51,9 @@ Integer
 == Algorithm
 
 *Your Algorith:*
-1. Return is boolean is false
-2. Divise salary by half
+
+. Return 0 if `eligibility` is false
+. Return half of `salary` otherwise
 
 == Code
 

@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -57,24 +55,29 @@ Array
 == Algorithm
 
 *Your Algorith:*
-1. Split the string by spaces and create an array of every word.
-2. Iterate over the array and print each word.
-  1. Reverse words that are 5+ chars.
+
+. Split the given sentence by spaces and initialize new local variable `words`
+. Iterate over `words` with `map` passing in a `do..end` block and save the
+result to local variable `reversed_words`
+  . Reverse letters if the string's length is +5
+  . Return string as is otherwise
+. Join `reversed_words` with spaces
 
 == Code
 
 =end
 
-def reverse_words(str)
-  str_ary = str.split(' ')
-  str_ary.map! do |word|
+def reverse_words(sentence)
+  words = sentence.split
+  reversed_words = words.map do |word|
     if word.length >= 5
-      word.reverse
+      word.split('').reverse.join
     else
       word
     end
   end
-  str_ary.join(' ')
+
+  reversed_words.join(' ')
 end
 
 puts reverse_words('Professional')          # => lanoisseforP
