@@ -1,3 +1,1 @@
-(1..99).each do |i|
-  puts i if i.odd?
-end
+1.step(by: 2, to: 99) { |odd| puts odd }

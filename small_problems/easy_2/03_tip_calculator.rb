@@ -7,8 +7,8 @@ tip_percentage = gets.to_f
 tip = bill * (tip_percentage / 100)
 total = bill + tip
 
-tip = "%.2f" % tip
-total = "%.2f" % total
+tip = format("%.2f", tip)
+total = format("%.2f", total)
 
 puts "The tip is $#{tip}"
 puts "The total is $#{total}"

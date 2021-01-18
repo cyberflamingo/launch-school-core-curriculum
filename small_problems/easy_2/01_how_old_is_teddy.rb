@@ -1,7 +1,7 @@
 puts "Hello! What's your name?"
 name = gets.chomp
 
-name = 'Teddy' unless name != ''
+name = 'Teddy' if name.strip.empty?
 
 teddy_age = rand(20..200)
 

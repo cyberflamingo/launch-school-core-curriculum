@@ -2,34 +2,52 @@ def prompt(message)
   puts ">> #{message}"
 end
 
-operator = ["sum", "product"]
+def ask_for_integer
+  integer = 0
 
-operator_letter = operator.map do |val|
-  val[0]
+  loop do
+    prompt('Please enter an integer greater than 0:')
+    integer = gets.to_i
+
+    break if integer > 0
+  end
+
+  integer
 end
 
-int = 1
-loop do
-  prompt("Please enter an integer greater than 0:")
-  int = gets.to_i
+def ask_for_operation
+  possible_inputs = ['s', 'p']
+  operation = String.new
 
-  break if int > 0
+  loop do
+    prompt("Enter 's' to compute the sum, 'p' to compute the product.")
+    operation = gets.chomp.downcase[0]
+
+    break if possible_inputs.include?(operation)
+  end
+
+  operation
 end
 
-selected_operator = ''
-loop do
-  prompt("Enter 's' to compute the sum, 'p' to compute the product.")
-  selected_operator = gets.chomp
+def sum_or_product
+  min_num = 1
+  max_num = ask_for_integer
 
-  break if operator_letter.include?(selected_operator)
+  operation = ask_for_operation
+
+  case operation
+  when 's'
+    result = (min_num..max_num).reduce(&:+)
+    operation = 'sum'
+  when 'p'
+    result = (min_num..max_num).reduce(&:*)
+    operation = 'product'
+  else
+    reurn "Error! No operation found."
+  end
+
+  puts "The #{operation} of the integers between #{min_num} and " \
+       "#{max_num} is #{result}."
 end
 
-if selected_operator == 's'
-  result = (1..int).inject(:+)
-  puts "The sum of the integers between 1 and #{int} is #{result}."
-elsif selected_operator == 'p'
-  result = (1..int).inject(:*)
-  puts "The product of the integers between 1 and #{int} is #{result}."
-else
-  puts "I didn't get that"
-end
+sum_or_product
