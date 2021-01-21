@@ -1,20 +1,14 @@
-DIGITS = {
-  '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5,
-  '6' => 6, '7' => 7, '8' => 8, '9' => 9, '0' => 0
-}
+DIGITS = ('0'..'9').to_a
 
 def string_to_integer(string)
-  digits = string.chars.map do |char|
-    DIGITS[char]
+  power = 1
+
+  integer = string.chars.reverse.map.with_index do |character, index|
+    power *= 10 unless index == 0
+    DIGITS.index(character) * power
   end
 
-  value = 0
-
-  digits.each do |digit|
-    value = 10 * value + digit
-  end
-
-  value
+  integer.sum
 end
 
 p string_to_integer('4321') == 4321

@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -73,28 +71,23 @@ Array of multiples of 3 and 5
 == Algorithm
 
 *Your Algorith:*
-1. Initialize `multiples = []`
-2. Iterate over the given number from 1 to itself
-3. For each iteration, check if there is multiples of 3 or 5
-  1. If yes, Add them to `multiples`
-  2. If no, continue to next iteration
-4. Check for doublons in `multiples` and get rid of it
-5. Sum every multiple in multiples
-6. Return the result
+
+. Initialize a local variable `multiples` of array data type
+. Create a range of numbers from 1 to given `number` and iterate over it
+  . For each iteration, modulo the number by 3 or 5 and save it if the result
+    is 0
+. Return the sum of each element in the array
 
 == Code
 
 =end
 
 def multisum(num)
-  multiples = []
+  multiples = Array.new
 
-  (1..num).each do |digit|
-    multiples << digit if digit % 3 == 0 || digit % 5 == 0
+  (1..num).each do |element|
+    multiples << element if element % 3 == 0 || element % 5 == 0
   end
-
-  # Actually usesless
-  # multiples.uniq!
 
   multiples.sum
 end

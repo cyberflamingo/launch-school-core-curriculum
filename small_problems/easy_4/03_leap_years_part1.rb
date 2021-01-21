@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -77,11 +75,9 @@ Integers
 == Algorithm
 
 *Your Algorith:*
-1. Return TRUE if year is evenly divisible by 400
-2. Check if year is evenly divisible by 100
-  1. If TRUE return FALSE
-3. Check if year is evenly divisible by 4
-  1. If TRUE return TRUE
+
+. Return true if given year modulo 400 returns 0
+. If year is divisible by 4 but not by 100, return true
 
 == Code
 
@@ -89,12 +85,7 @@ Integers
 
 def leap_year?(year)
   return true if year % 400 == 0
-
-  if year % 100 == 0
-    false
-  else
-    year % 4 == 0
-  end
+  (year % 4 == 0 && year % 100 != 0)
 end
 
 p leap_year?(2016) == true

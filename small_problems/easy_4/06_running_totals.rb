@@ -1,8 +1,10 @@
 def running_total(num_array)
-  running_array = []
-
-  num_array.each_with_index do |num, i|
-    running_array << num + running_array.fetch(i - 1, 0)
+  running_array = num_array.map.with_index do |number, index|
+    if index == 0
+      number
+    else
+      number + num_array[0..(index - 1)].sum
+    end
   end
 
   running_array

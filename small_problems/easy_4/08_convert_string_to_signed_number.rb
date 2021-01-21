@@ -6,19 +6,14 @@ DIGITS = {
 def string_to_signed_integer(string)
   string_ary = string.chars
   negative_char = false
+  value = 0
 
-  if string_ary[0] == '+'
-    string_ary.shift
-  elsif string_ary[0] == '-'
-    negative_char = true
-    string_ary.shift
-  end
+  negative_char = true if string_ary[0] == '-'
+  string_ary.shift if string_ary[0] == '+' || string_ary[0] == '-'
 
   digits = string_ary.map do |char|
     DIGITS[char]
   end
-
-  value = 0
 
   digits.each do |digit|
     value = 10 * value + digit

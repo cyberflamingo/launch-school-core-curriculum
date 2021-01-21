@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -132,14 +130,10 @@ def add_suffix(century)
     suffix = 'th'
   else
     suffix = case ones
-             when 1
-               'st'
-             when 2
-               'nd'
-             when 3
-               'rd'
-             else
-               'th'
+             when 1 then 'st'
+             when 2 then 'nd'
+             when 3 then 'rd'
+             else        'th'
              end
   end
 
