@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -75,42 +73,27 @@ No data structure (only integer)
 == Algorithm
 
 *Your Algorith:*
-0. Initialize a hash `time` with keys :days, :hours and :minutes set to 0
-1. Convert the given `initial_decimal_minutes` integer in seconds ( * 60)
-2. Divmod the above result by 86,400
-   1. Save the first result
-   2. Discard the remainders? Save the remainders in time[:days]
-3. Divmod the above result by 3600
-   1. Save the first result in time[:hours]
-   2. Save the remainders
-4. Divmod the above result by 60
-   1. Save the first result in time[:minutes]
-   2. Discard the remainding seconds
-5. Get the values of the hash
-  1. Join the values and format them to fit the "hh:mm" format requirement
-  2. Return the result
+
+. Initialize constant MIN_PER_DAY to 60 * 24
+. Initialize constant MIN_PER_HOUR to 60 * 1
+. Use `divmod` on the given number to get the number of day and the number of
+minutes
+  . Discard number of day and save number of minutes to `time_in_min`
+. Use `divmod` on `time_in_min`, save in local variable `hours` and `minutes`
+. Return concatenated string `hours` ":" `minutes`
 
 == Code
 
 =end
 
-MIN_TO_SEC = 60
-HOUR_TO_SEC = MIN_TO_SEC * 60 # 3600
-DAY_TO_SEC = HOUR_TO_SEC * 24 # 86_400
+MIN_PER_HOUR = 60
+MIN_PER_DAY = MIN_PER_HOUR * 24
 
 def time_of_day(initial_decimal_minutes)
-  time = { hours: 0, minutes: 0 }
-  decimal_seconds = initial_decimal_minutes * MIN_TO_SEC
+  _, time_in_min = initial_decimal_minutes.divmod(MIN_PER_DAY)
+  hours, minutes = time_in_min.divmod(MIN_PER_HOUR)
 
-  _, decimal_seconds = decimal_seconds.divmod(DAY_TO_SEC)
-
-  time[:hours], decimal_seconds = decimal_seconds.divmod(HOUR_TO_SEC)
-  time[:minutes], = decimal_seconds.divmod(MIN_TO_SEC)
-
-  # puts 'hours: ' + time[:hours].to_s
-  # puts 'minutes: ' + time[:minutes].to_s
-
-  format('%02d:%02d', time[:hours], time[:minutes])
+  "#{format('%02d', hours)}:#{format('%02d', minutes)}"
 end
 
 p time_of_day(0) == "00:00"

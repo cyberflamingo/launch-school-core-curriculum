@@ -1,17 +1,11 @@
-def word_sizes(str)
-  hsh = {}
+def word_sizes(string)
+  count = Hash.new(0)
 
-  str.split.each do |word|
-    l = word.length
-
-    if hsh.key?(l)
-      hsh[l] += 1
-    else
-      hsh[l] = 1
-    end
+  string.split.each do |word|
+    count[word.length] += 1
   end
 
-  hsh
+  count
 end
 
 p word_sizes('Four score and seven.') == { 3 => 1, 4 => 1, 5 => 1, 6 => 1 }

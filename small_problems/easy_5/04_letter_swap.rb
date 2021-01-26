@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-=begin rdoc
+=begin
 
 = PEDAC Template
 
@@ -69,34 +67,23 @@ Array of string
 == Algorithm
 
 *Your Algorith:*
-1. From the string, create an array of every substring (separation at space)
-2. Create another array that will receive our swapped words
-3. Iterate over the array of substrings
-  1. Copy the substring
-  2. Take the first character from the substring and swap it for the last
-     in the copy
-  3. Take the last character from the substring and swap it for the first
-     in the copy
-  4. Save the new string in the array created previously
-4. Join the substring in the resulting array with a space and return
+
+. Split the given string by space
+. Iterate over the result with `map` and use parallel assignment in the do..end
+block
+. Return the result joint with space
 
 == Code
 
 =end
 
-def swap(str)
-  ary = str.split
+def swap(string)
+  split_string = string.split
 
-  swap_ary = ary.map do |str1|
-    str2 = str1.dup
-
-    str2[-1] = str1[0]
-    str2[0] = str1[-1]
-
-    str2
-  end
-
-  swap_ary.join(' ')
+  split_string.map do |word|
+    word[0], word[-1] = word[-1], word[0]
+    word
+  end.join(' ')
 end
 
 p swap('Oh what a wonderful day it is') == 'hO thaw a londerfuw yad ti si'

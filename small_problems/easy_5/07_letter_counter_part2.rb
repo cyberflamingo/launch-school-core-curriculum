@@ -1,32 +1,22 @@
-ALPHABET = ('A'..'z').to_a
+ALPHABET = ('a'..'z').to_a
 
-def cleanup(str)
-  cleanup_str = str.split('').map do |char|
-    if ALPHABET.include?(char) || char == ' '
-      char
-    else
-      ''
-    end
+def delete_non_letters(string)
+  letters_only = string.chars.map do |char|
+    char if ALPHABET.include?(char.downcase)
   end
 
-  cleanup_str.join.squeeze(' ')
+  letters_only.compact.join
 end
 
-def word_sizes(str)
-  hsh = {}
-  alpha_only = cleanup(str)
+def word_sizes(words_string)
+  count = Hash.new(0)
 
-  alpha_only.split.each do |word|
-    l = word.length
-
-    if hsh.key?(l)
-      hsh[l] += 1
-    else
-      hsh[l] = 1
-    end
+  words_string.split.each do |word|
+    letters_only = delete_non_letters(word)
+    count[letters_only.length] += 1
   end
 
-  hsh
+  count
 end
 
 p word_sizes('Four score and seven.') == { 3 => 1, 4 => 1, 5 => 2 }

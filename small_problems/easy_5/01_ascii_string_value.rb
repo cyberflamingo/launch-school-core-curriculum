@@ -1,12 +1,5 @@
 def ascii_value(str)
-  ascii = 0
-
-  ary = str.split('')
-  ary.each do |char|
-    ascii += char.ord
-  end
-
-  ascii
+  str.chars.map(&:ord).sum
 end
 
 p ascii_value('Four score') == 984
