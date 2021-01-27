@@ -1,13 +1,16 @@
-require 'pry'
-
-def triangle(n, dir)
+def starting_direction(dir)
+  spaces = n - 1
+  stars = 1
   if dir.start_with?('top')
     spaces = 0
     stars = n
-  else
-    spaces = n - 1
-    stars = 1
   end
+
+  return spaces, stars
+end
+
+def triangle(n, dir)
+  spaces, stars = starting_direction(dir)
 
   n.times do
     if dir.end_with?('left')
@@ -15,7 +18,6 @@ def triangle(n, dir)
     else
       puts (' ' * spaces) + ('*' * stars)
     end
-    # binding.pry
 
     if dir.start_with?('top')
       spaces += 1
