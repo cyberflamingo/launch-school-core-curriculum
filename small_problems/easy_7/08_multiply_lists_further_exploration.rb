@@ -1,5 +1,3 @@
-require 'pry'
-
 def multiply_list(list1, list2)
   list1.zip(list2).map { |a, b| a * b }
 end

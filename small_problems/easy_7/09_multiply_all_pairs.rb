@@ -1,9 +1,9 @@
-def multiply_all_pairs(list_1, list_2)
+def multiply_all_pairs(list1, list2)
   result = []
 
-  list_1.each do |num_1|
-    list_2.each do |num_2|
-      result << num_1 * num_2
+  list1.each do |num1|
+    list2.each do |num2|
+      result << num1 * num2
     end
   end
 

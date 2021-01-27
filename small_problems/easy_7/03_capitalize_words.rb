@@ -1,7 +1,5 @@
 def word_cap(string)
-  capital_case = string.split(' ').each(&:capitalize!).join(' ')
-
-  capital_case
+  string.split(' ').each(&:capitalize!).join(' ')
 end
 
 p word_cap('four score and seven') == 'Four Score And Seven'
