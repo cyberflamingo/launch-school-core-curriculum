@@ -1,11 +1,11 @@
 def center_of(string)
-  string_size = string.size
-  half_string_size = string_size / 2
+  string.size.odd? ? is_odd = true : is_odd == false
+  string_middle = string.size / 2
 
-  if string_size.even?
-    string[half_string_size - 1, 2]
+  if is_odd
+    string.slice(string_middle)
   else
-    string[half_string_size]
+    string.slice((string_middle - 1)..string_middle)
   end
 end
 

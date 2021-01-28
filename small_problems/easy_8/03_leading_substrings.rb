@@ -1,8 +1,8 @@
-def leading_substrings(str)
-  substrings = []
+def leading_substrings(string)
+  substrings = Array.new
 
-  str.size.times do |index|
-    substrings << str[0..index]
+  string.size.times do |index|
+    substrings << string[0..index]
   end
 
   substrings

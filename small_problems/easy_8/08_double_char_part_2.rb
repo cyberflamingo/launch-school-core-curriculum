@@ -2,17 +2,13 @@ VOWELS = %w(a e i o u)
 CONSONANT = ('a'..'z').to_a - VOWELS
 
 def double_consonants(str)
-  repeated_str = ''
-
-  str.chars.each do |char|
+  str.chars.map do |char|
     if CONSONANT.include?(char.downcase)
-      repeated_str << char << char
+      char + char
     else
-      repeated_str << char
+      char
     end
-  end
-
-  repeated_str
+  end.join
 end
 
 p double_consonants('String') == "SSttrrinngg"

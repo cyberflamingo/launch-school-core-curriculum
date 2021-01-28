@@ -1,34 +1,29 @@
-def leading_substrings(str)
-  substrings = []
+def leading_substrings(string)
+  substrings = Array.new
 
-  str.size.times do |index|
-    substrings << str[0..index]
+  string.size.times do |index|
+    substrings << string[0..index]
   end
 
   substrings
 end
 
 def substrings(string)
-  result = []
+  substrings_list = Array.new
 
-  0.upto(string.size - 1) do |index|
-    result << leading_substrings(string[index..string.size])
+  string.size.times do |index|
+    substrings_list << leading_substrings(string[index..-1])
   end
 
-  result.flatten
+  substrings_list.flatten
 end
 
 def palindromes(string)
-  substrs = substrings(string)
-  palindromes = []
+  substrings_list = substrings(string)
 
-  substrs.each do |substr|
-    if substr.size > 1 && substr.reverse == substr
-      palindromes << substr
-    end
+  substrings_list.select do |substring|
+    substring.size > 1 && substring == substring.reverse
   end
-
-  palindromes
 end
 
 p palindromes('abcd') == []

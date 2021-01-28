@@ -1,11 +1,5 @@
 def repeater(str)
-  repeated_str = ''
-
-  str.chars.each do |char|
-    repeated_str << char << char
-  end
-
-  repeated_str
+  str.chars.map { |char| char + char }.join
 end
 
 p repeater('Hello') == "HHeelllloo"

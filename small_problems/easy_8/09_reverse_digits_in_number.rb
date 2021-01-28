@@ -1,6 +1,5 @@
 def reversed_number(integer)
-  reversed_string = integer.to_s.reverse
-  reversed_string.to_i
+  integer.to_s.reverse.to_i
 end
 
 p reversed_number(12345) == 54321

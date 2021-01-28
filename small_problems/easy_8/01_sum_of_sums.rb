@@ -1,13 +1,13 @@
-def sum_of_sums(array)
-  sums = []
+def sum_of_sums(numbers)
+  sum = 0
+  subsequent_array = Array.new
 
-  array.size.times do |outer_index|
-    (0..outer_index).each do |inner_index|
-      sums << array[inner_index]
-    end
+  numbers.each do |number|
+    subsequent_array << number
+    sum += subsequent_array.sum
   end
 
-  sums.sum
+  sum
 end
 
 p sum_of_sums([3, 5, 2]) == (3) + (3 + 5) + (3 + 5 + 2) # -> (21)

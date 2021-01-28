@@ -1,23 +1,36 @@
-def leading_substrings(str)
-  substrings = []
+def leading_substrings(string)
+  substrings = Array.new
 
-  str.size.times do |index|
-    substrings << str[0..index]
+  string.size.times do |index|
+    substrings << string[0..index]
   end
 
   substrings
 end
 
 def substrings(string)
-  result = []
+  substrings_list = Array.new
 
-  0.upto(string.size - 1) do |index|
-    result << leading_substrings(string[index..string.size])
+  string.size.times do |index|
+    substrings_list << leading_substrings(string[index..-1])
   end
 
-  result.flatten
+  substrings_list.flatten
 end
 
+p substrings('abc') == [
+  'a', 'ab', 'abc',
+  'b', 'bc',
+  'c'
+]
+p substrings('a') == ['a']
+p substrings('xyzzy') == [
+  'x', 'xy', 'xyz', 'xyzz', 'xyzzy',
+  'y', 'yz', 'yzz', 'yzzy',
+  'z', 'zz', 'zzy',
+  'z', 'zy',
+  'y'
+]
 p substrings('abcde') == [
   'a', 'ab', 'abc', 'abcd', 'abcde',
   'b', 'bc', 'bcd', 'bcde',
