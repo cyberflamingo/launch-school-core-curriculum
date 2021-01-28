@@ -1,11 +1,5 @@
 def sequence(num)
-  sequence_array = []
-
-  1.upto(num) do |index|
-    sequence_array << index
-  end
-
-  sequence_array
+  1.upto(num).map { |digit| digit }
 end
 
 p sequence(5) == [1, 2, 3, 4, 5]

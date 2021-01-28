@@ -1,15 +1,13 @@
 def double(num)
   string_num = num.to_s
-  index = string_num.length
-  return false if index.odd?
-  half_index = index / 2
+  center = string_num.size / 2
 
-  string_num[0, half_index] == string_num[half_index, half_index]
+  string_num.size.even? == true &&
+    string_num[0..(center - 1)] == string_num[center..-1]
 end
 
 def twice(integer)
-  return integer * 2 unless double(integer)
-  integer
+  double(integer) ? integer : integer * 2
 end
 
 p twice(37) == 74

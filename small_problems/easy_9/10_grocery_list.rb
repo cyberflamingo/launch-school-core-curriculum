@@ -1,13 +1,13 @@
 def buy_fruit(list)
-  fruit_list = []
+  fruits_list = Array.new
 
-  list.each do |fruit_quantity|
-    fruit_quantity[1].times do
-      fruit_list << fruit_quantity[0]
+  list.each do |item|
+    item[1].times do
+      fruits_list << item[0]
     end
   end
 
-  fruit_list
+  fruits_list
 end
 
 p buy_fruit([["apples", 3], ["orange", 1], ["bananas", 2]]) ==

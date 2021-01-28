@@ -3,9 +3,9 @@ def get_grade(grade1, grade2, grade3)
 
   case mean
   when 90..100 then 'A'
-  when 80..90  then 'B'
-  when 70..80  then 'C'
-  when 60..70  then 'D'
+  when 80..89  then 'B'
+  when 70..79  then 'C'
+  when 60..69  then 'D'
   else              'F'
   end
 end

@@ -1,11 +1,7 @@
 def word_lengths(string)
-  split_str = []
-
-  string.split do |word|
-    split_str << "#{word} #{word.length}"
+  string.split.map do |word|
+    "#{word} #{word.length}"
   end
-
-  split_str
 end
 
 p word_lengths("cow sheep chicken") == ["cow 3", "sheep 5", "chicken 7"]
