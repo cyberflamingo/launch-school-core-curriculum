@@ -1,20 +1,15 @@
 def rotate_array(list)
-  rotated_list = []
-  rotation_end_index = list.size - 1
+  rotated_list = list.dup
+  rotated_list << rotated_list.shift
 
-  (1..rotation_end_index).each do |index|
-    rotated_list << list[index]
-  end
-
-  rotated_list.push(list[0])
+  rotated_list
 end
 
 def rotate_rightmost_digits(number, n)
-  rightmost_digits = number.to_s.split('')[-n..-1]
-  rest = number.to_s.split('')[0...-n]
-  rotated_rightmost_digits = rotate_array(rightmost_digits)
+  leftmost_digits  = number.to_s[0...-n]
+  rightmost_digits = rotate_array(number.to_s[-n..-1].chars)
 
-  (rest.join + rotated_rightmost_digits.join).to_i
+  (leftmost_digits + rightmost_digits.join).to_i
 end
 
 p rotate_rightmost_digits(735291, 1) == 735291

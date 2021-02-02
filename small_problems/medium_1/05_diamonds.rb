@@ -1,24 +1,25 @@
+def create_descending_pattern(line, size)
+  stars  = '*' * (((size - line) * 2) + 1)
+  spaces = ' ' * ((size - stars.length) / 2)
+
+  puts spaces + stars + spaces
+end
+
+def create_ascending_pattern(line, size)
+  stars  = '*' * ((line * 2) - 1)
+  spaces = ' ' * ((size - stars.length) / 2)
+
+  puts spaces + stars + spaces
+end
+
 def diamond(num)
-  stars = 1
-  spaces = (num - stars) / 2
-
-  num.times do
-    puts ' ' * spaces + ('*' * stars) + (' ' * spaces)
-    stars += 2
-    spaces = (num - stars) / 2
-
-    break if spaces < 0
-  end
-
-  stars = num - 2
-  spaces = (num - stars) / 2
-
-  (-num..0).each do
-    break if stars < 0
-
-    puts ' ' * spaces + ('*' * stars) + (' ' * spaces)
-    stars -= 2
-    spaces = (num - stars) / 2
+  num.times do |line|
+    line += 1
+    if line <= (num / 2)
+      create_ascending_pattern(line, num)
+    else
+      create_descending_pattern(line, num)
+    end
   end
 end
 
@@ -29,6 +30,13 @@ diamond(3)
 #  *
 # ***
 #  *
+
+diamond(5)
+#   *
+#  ***
+# *****
+#  ***
+#   *
 
 diamond(9)
 #     *
