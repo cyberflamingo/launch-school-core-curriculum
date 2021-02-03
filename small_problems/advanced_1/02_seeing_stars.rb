@@ -1,9 +1,6 @@
-require 'pry'
-
 def create_descending_pattern(line, size)
   outer_spaces = size - line
   inner_spaces = (size - 3 - (outer_spaces * 2)) / 2
-  # binding.pry
   outer_spaces = ' ' * outer_spaces
   inner_spaces = ' ' * inner_spaces
 
