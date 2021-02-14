@@ -1,32 +1,25 @@
-# frozen_string_literal: true
+=begin
 
-=begin rdoc
+PEDAC Template
+==============
 
-= PEDAC Template
+(Understand the) Problem
+------------------------
 
-== (Understand the) Problem
-
-First, identify the inputs and the outputs of the problem
-
-* Inputs:
-  1.
-  2.
-* Output:
-  1.
+-  Inputs:
+-  Output:
 
 ---
 
-*Problem Domain:*
-
-
----
-
-*Implicit Requirements:*
-
+**Problem Domain:**
 
 ---
 
-*Clarifying Questions:*
+**Implicit Requirements:**
+
+---
+
+**Clarifying Questions:**
 
 1.
 2.
@@ -34,64 +27,49 @@ First, identify the inputs and the outputs of the problem
 
 ---
 
-*Mental Model:*
-
-
----
-
-== Examples / Test Cases / Edge Cases
-
-*Examples:*
-
-* Example 1
-  * Inputs:
-    1.
-    2.
-  * Output
-    1.
-* Example 2
-  * Inputs:
-    1.
-    2.
-  * Output
-    1.
+**Mental Model:**
 
 ---
 
-*Your Test Cases:*
+Examples / Test Cases / Edge Cases
+----------------------------------
 
-* Example 3
-  * Inputs:
-    1.
-    2.
-  * Output
-    1.
+**Examples:**
 
----
-
-*Your Edge Cases:*
-
-* Example 4
-  * Inputs:
-    1.
-    2.
-  * Output
-    1.
+-  Example 1
+  -  Inputs:
+  -  Output:
+-  Example 2
+  -  Inputs:
+  -  Output:
 
 ---
 
-== Data Structure
+_Your Test Cases:_
 
-*Your Data Structure:*
-
+-  Example 3
+  -  Inputs:
+  -  Output:
 
 ---
 
-== Algorithm
+_Your Edge Cases:_
 
-*Your Algorith:*
+-  Example 4
+  -  Inputs:
+  -  Output:
 
+---
 
-== Code
+Data Structure
+--------------
+
+---
+
+Algorithm
+---------
+
+Code
+----
 
 =end
