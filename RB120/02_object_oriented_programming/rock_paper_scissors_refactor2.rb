@@ -120,21 +120,6 @@ class RPSGame
     else
       puts "It's a tie!"
     end
-
-    # case human.move
-    # when 'rock'
-    #   puts "It's a tie!" if computer.move == 'rock'
-    #   puts "#{human.name} won!" if computer.move == 'scissors'
-    #   puts "#{computer.name} won!" if computer.move == 'paper'
-    # when 'paper'
-    #   puts "It's a tie!" if computer.move == 'paper'
-    #   puts "#{human.name} won!" if computer.move == 'rock'
-    #   puts "#{computer.name} won!" if computer.move == 'scissors'
-    # when 'scissors'
-    #   puts "It's a tie!" if computer.move == 'scissors'
-    #   puts "#{human.name} won!" if computer.move == 'paper'
-    #   puts "#{computer.name} won!" if computer.move == 'rock'
-    # end
   end
 
   def play_again?
