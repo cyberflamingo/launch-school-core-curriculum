@@ -34,6 +34,17 @@ class Board
   end
   # rubocop:enable Metrics/AbcSize
 
+  def immediate_threat(marker)
+    WINNING_LINES.each do |line|
+      if at_threat(line, marker)
+        risky_square = find_at_risk_square(line)
+        return risky_square unless risky_square.nil?
+      end
+    end
+
+    nil
+  end
+
   def full?
     unmarked_keys.empty?
   end
@@ -59,6 +70,18 @@ class Board
   end
 
   private
+
+  def at_threat(line, risk_marker)
+    @squares.values_at(*line).select do |square|
+      square.marker == risk_marker
+    end.size == 2
+  end
+
+  def find_at_risk_square(line)
+    @squares.select do |position, square|
+      line.include?(position) && square.marker == Square::INITIAL_MARKER
+    end.keys.first
+  end
 
   def three_identitcal_markers?(squares)
     markers = squares.select(&:marked?).collect(&:marker)
@@ -102,14 +125,14 @@ end
 class TTTGame
   HUMAN_MARKER = 'X'
   COMPUTER_MARKER = 'O'
-  FIRST_TO_MOVE = HUMAN_MARKER
   MAX_SCORE = 5
 
   def initialize
     @board = Board.new
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
-    @current_marker = FIRST_TO_MOVE
+    @first_to_move = ask_first_to_move
+    @current_marker = @first_to_move
   end
 
   def play
@@ -122,8 +145,25 @@ class TTTGame
 
   private
 
-  attr_reader :board, :human, :computer
+  attr_reader :board, :human, :computer, :first_to_move
   attr_accessor :current_marker
+
+  def ask_first_to_move
+    human_goes_first? ? HUMAN_MARKER : COMPUTER_MARKER
+  end
+
+  def human_goes_first?
+    answer = 'y'
+
+    loop do
+      puts 'Would you like to play first? (y/n)'
+      answer = gets.chomp.downcase
+      break if %w(y n).include? answer
+      puts 'Sorry, must be y or n'
+    end
+
+    answer == 'y'
+  end
 
   def main_game
     loop do
@@ -190,9 +230,18 @@ class TTTGame
     end.join
   end
 
+  # rubocop:disable Metrics/AbcSize
   def computer_moves
+    defense_key = board.immediate_threat(human.marker)
+    offense_key = board.immediate_threat(computer.marker)
+
+    return board[offense_key] = computer.marker unless offense_key.nil?
+    return board[defense_key] = computer.marker unless defense_key.nil?
+    return board[5] = computer.marker if board.unmarked_keys.include?(5)
+
     board[board.unmarked_keys.sample] = computer.marker
   end
+  # rubocop:enable Metrics/AbcSize
 
   def current_player_moves
     if human_turn?
@@ -258,7 +307,7 @@ class TTTGame
 
   def reset
     board.reset
-    self.current_marker = FIRST_TO_MOVE
+    self.current_marker = first_to_move
     clear
   end
 
