@@ -113,12 +113,30 @@ class Square
 end
 
 class Player
-  attr_reader :marker
+  @@player_number = 0
+
+  attr_reader :marker, :name
   attr_accessor :score
 
-  def initialize(marker)
+  def initialize(marker, default_name = 'Computer')
+    @@player_number += 1
+    @name = set_name(default_name)
     @marker = marker
     @score = 0
+  end
+
+  def set_name(default_name)
+    name = ''
+
+    loop do
+      puts "Please input a name for #{default_name} " \
+           "(#{self.class} #{@@player_number}) or " \
+           "skip by pressing 'Enter'."
+      name = gets.chomp.gsub(/\w+/, &:capitalize)
+      break
+    end
+
+    name.empty? ? default_name : name
   end
 end
 
@@ -129,7 +147,7 @@ class TTTGame
   def initialize
     @board = Board.new
     @human_marker = select_marker
-    @human = Player.new(@human_marker)
+    @human = Player.new(@human_marker, 'Human')
     @computer = Player.new(COMPUTER_MARKER)
     @first_to_move = ask_first_to_move
     @current_marker = @first_to_move
@@ -184,7 +202,7 @@ class TTTGame
     answer = 'y'
 
     loop do
-      puts 'Would you like to play first? (y/n)'
+      puts "#{human.name}, would you like to play first? (y/n)"
       answer = gets.chomp.downcase
       break if %w(y n).include? answer
       puts 'Sorry, must be y or n'
@@ -225,7 +243,8 @@ class TTTGame
   end
 
   def display_board
-    puts "You're a #{human.marker}. Computer is a #{computer.marker}."
+    puts "#{human.name} is a #{human.marker}. #{computer.name} is a " \
+         "#{computer.marker}."
     puts ''
     board.draw
     puts ''
@@ -299,9 +318,9 @@ class TTTGame
 
     case board.winning_marker
     when human.marker
-      puts "You won! Current score: #{human.score}"
+      puts "#{human.name} won! Current score: #{human.score}"
     when computer.marker
-      puts "Computer won! Current score: #{computer.score}"
+      puts "#{computer.name} won! Current score: #{computer.score}"
     else
       puts "It's a tie!"
     end
@@ -311,7 +330,7 @@ class TTTGame
     answer = nil
 
     loop do
-      puts 'Would you like to play again? (y/n)'
+      puts "#{human.name}, would you like to play again? (y/n)"
       answer = gets.chomp.downcase
       break if %w(y n).include? answer
       puts 'Sorry, must be y or n'
@@ -325,8 +344,8 @@ class TTTGame
   end
 
   def display_final_result
-    puts "Your score:       #{human.score}"
-    puts "Computer's score: #{computer.score}"
+    puts "#{human.name}'s score:    #{human.score}"
+    puts "#{computer.name}'s score: #{computer.score}"
   end
 
   def clear
