@@ -113,6 +113,7 @@ class Square
 end
 
 class Player
+  # rubocop:disable Style/ClassVars
   @@player_number = 0
 
   attr_reader :marker, :name
@@ -120,6 +121,7 @@ class Player
 
   def initialize(marker, default_name = 'Computer')
     @@player_number += 1
+    # rubocop:enable Style/ClassVars
     @name = set_name(default_name)
     @marker = marker
     @score = 0
@@ -313,6 +315,7 @@ class TTTGame
     end
   end
 
+  # rubocop:disable Metrics/AbcSize
   def display_result
     clear_screen_and_display_board
 
@@ -325,6 +328,7 @@ class TTTGame
       puts "It's a tie!"
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def play_again?
     answer = nil
