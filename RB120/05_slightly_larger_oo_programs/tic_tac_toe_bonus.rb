@@ -123,13 +123,13 @@ class Player
 end
 
 class TTTGame
-  HUMAN_MARKER = 'X'
   COMPUTER_MARKER = 'O'
   MAX_SCORE = 5
 
   def initialize
     @board = Board.new
-    @human = Player.new(HUMAN_MARKER)
+    @human_marker = select_marker
+    @human = Player.new(@human_marker)
     @computer = Player.new(COMPUTER_MARKER)
     @first_to_move = ask_first_to_move
     @current_marker = @first_to_move
@@ -145,11 +145,39 @@ class TTTGame
 
   private
 
-  attr_reader :board, :human, :computer, :first_to_move
+  attr_reader :board, :human, :computer, :first_to_move, :human_marker
   attr_accessor :current_marker
 
+  def select_marker
+    marker = 'X'
+    return marker unless select_marker?
+
+    loop do
+      puts "Please select one English letter as a marker " \
+           "(minus '#{COMPUTER_MARKER}')"
+      marker = gets.chomp[0].upcase
+      break unless marker == COMPUTER_MARKER
+      puts "Sorry, your marker cannot be '#{COMPUTER_MARKER}'"
+    end
+
+    marker
+  end
+
+  def select_marker?
+    answer = 'n'
+
+    loop do
+      puts 'Would you like to choose your marker? (y/n)'
+      answer = gets.chomp.downcase
+      break if %w(y n).include? answer
+      puts 'Sorry, must be y or n'
+    end
+
+    answer == 'y'
+  end
+
   def ask_first_to_move
-    human_goes_first? ? HUMAN_MARKER : COMPUTER_MARKER
+    human_goes_first? ? human_marker : COMPUTER_MARKER
   end
 
   def human_goes_first?
@@ -249,12 +277,12 @@ class TTTGame
       self.current_marker = COMPUTER_MARKER
     else
       computer_moves
-      self.current_marker = HUMAN_MARKER
+      self.current_marker = human_marker
     end
   end
 
   def human_turn?
-    current_marker == HUMAN_MARKER
+    current_marker == human_marker
   end
 
   def record_score
