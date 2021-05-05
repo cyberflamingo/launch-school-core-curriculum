@@ -1,6 +1,13 @@
 module Hand
   attr_accessor :hand
 
+  def show_hand
+    puts "#{self.class}'s Hand:"
+    hand.each do |card|
+      puts "- #{card}"
+    end
+  end
+
   def hit(deck)
     hand.push(deck.deal(1)).flatten!
   end
@@ -46,6 +53,11 @@ class Dealer
 
   def initialize
     # seems like very similar to Player... do we even need this?
+  end
+
+  def show_one_card
+    puts "#{self.class}'s First Card:"
+    puts "- #{hand[0]}"
   end
 end
 
@@ -146,14 +158,10 @@ class Game
 
   def show_initial_cards
     system 'clear'
-    puts "Human's cards:"
-    human.hand.each do |card|
-      puts "- #{card}"
-    end
+    human.show_hand
 
     puts "\n"
-    puts "Dealer's first card:"
-    puts "- #{dealer.hand[0]}"
+    dealer.show_one_card
   end
 
   def player_turn
@@ -199,7 +207,9 @@ class Game
     end
 
     puts "-------------------------------"
-    show_all_cards
+    human.show_hand
+    puts "\n"
+    dealer.show_hand
   end
 
   def compare_cards
@@ -215,21 +225,6 @@ class Game
     else
       puts "It's a tie! You both have #{human_total} points!"
     end
-  end
-
-  def show_all_cards
-    puts "Human's cards:"
-    human.hand.each do |card|
-      puts "- #{card}"
-    end
-    puts "Score: #{human.total}"
-
-    puts "\n"
-    puts "Dealer's card:"
-    dealer.hand.each do |card|
-      puts "- #{card}"
-    end
-    puts "Score: #{dealer.total}"
   end
 end
 
