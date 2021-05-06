@@ -57,7 +57,8 @@ class Dealer
 
   def show_one_card
     puts "#{self.class}'s First Card:"
-    puts "- #{hand[0]}"
+    puts "- #{hand.first}"
+    puts "- ?? "
   end
 end
 
@@ -176,9 +177,14 @@ class Game
   end
 
   def dealer_turn
+    puts "Dealer's turn..."
+
     until dealer.total >= 17 || dealer.busted?
+      puts "Dealer hits!"
       dealer.hit(deck)
     end
+
+    puts "Dealer stays!" unless dealer.busted?
   end
 
   def hit_or_stay
@@ -196,8 +202,6 @@ class Game
   end
 
   def show_result
-    system 'clear'
-
     if human.busted?
       puts "You busted! Dealer wins!"
     elsif dealer.busted?
