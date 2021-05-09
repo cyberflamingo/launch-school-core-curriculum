@@ -44,24 +44,23 @@ class Minilang
   end
 
   def add
-    self.register += stack.pop
+    self.register += pop
   end
 
   def div
-    self.register /= stack.pop
-    # self.register = register / stack.pop
+    self.register /= pop # /
   end
 
   def mult
-    self.register *= stack.pop
+    self.register *= pop
   end
 
   def mod
-    self.register %= stack.pop
+    self.register %= pop
   end
 
   def sub
-    self.register -= stack.pop
+    self.register -= pop
   end
 
   def push
