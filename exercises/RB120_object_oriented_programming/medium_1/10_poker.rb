@@ -48,8 +48,6 @@ class Deck
   end
 end
 
-require 'pry'
-
 class PokerHand
   ROYAL_FLUSH = ([10] + %w(Jack Queen King Ace)).freeze
 
@@ -101,6 +99,23 @@ class PokerHand
     straight? && flush?
   end
 
+  def straight?
+    return false if ranks.uniq != ranks
+    hand.min.value.to_i == hand.max.value.to_i - 4
+  end
+
+  def flush?
+    hand.all? { |card| card.suit == hand.first.suit }
+  end
+
+  def pair?
+    n_of_a_kind?(2)
+  end
+
+  def three_of_a_kind?
+    n_of_a_kind?(3)
+  end
+
   def four_of_a_kind?
     n_of_a_kind?(4)
   end
@@ -109,31 +124,12 @@ class PokerHand
     n_of_a_kind?(3) && n_of_a_kind?(2)
   end
 
-  def flush?
-    suit = hand.first.suit
-
-    hand.all? { |card| card.suit == suit }
-  end
-
-  def straight?
-    return false if ranks.uniq != ranks
-    hand.min.value.to_i == hand.max.value.to_i - 4
-  end
-
   def n_of_a_kind?(number)
     ranks.uniq.one? { |card| ranks.count(card) == number }
   end
 
-  def three_of_a_kind?
-    n_of_a_kind?(3)
-  end
-
   def two_pair?
     ranks.uniq.select { |card| ranks.count(card) == 2 }.size == 2
-  end
-
-  def pair?
-    n_of_a_kind?(2)
   end
 end
 
