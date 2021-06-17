@@ -128,6 +128,30 @@ class TodoList
     selection
   end
 
+  def find_by_title(string)
+    select { |todo| todo.title == string }.first
+  end
+
+  def all_done
+    select(&:done?)
+  end
+
+  def all_not_done
+    select { |todo| !todo.done? }
+  end
+
+  def mark_done(string)
+    find_by_title(string).done! if find_by_title(string)
+  end
+
+  def mark_all_done
+    each(&:done!)
+  end
+
+  def mark_all_undone
+    each(&:undone!)
+  end
+
   private
 
   attr_accessor :todos
@@ -145,5 +169,24 @@ list.add(todo3)
 todo1.done!
 
 results = list.select(&:done?)
-
 puts results.inspect
+
+result_title = list.find_by_title("Go to gym")
+puts result_title.inspect
+
+todo2.done!
+
+result_all_done = list.all_done
+puts result_all_done.inspect
+
+result_all_not_done = list.all_not_done
+puts result_all_not_done.inspect
+
+result_mark_done = list.mark_done("Go to gym")
+puts result_mark_done.inspect
+
+result_mark_all_done = list.mark_all_done
+puts result_mark_all_done.inspect
+
+result_mark_all_undone = list.mark_all_undone
+puts result_mark_all_undone.inspect
