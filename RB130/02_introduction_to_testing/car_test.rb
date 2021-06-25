@@ -49,4 +49,14 @@ class CarTest < MiniTest::Test
   # assert_includes calls assert_equal in its implementation, and Minitest
   # counts that call as a separate assertion. For each assert_includes call
   # you will get 2 assertions, not 1.
+
+  def test_value_equality
+    car1 = Car.new
+    car2 = Car.new
+
+    car1.name = "Kim"
+    car2.name = "Kim"
+
+    assert_equal(car1, car2)
+  end
 end
