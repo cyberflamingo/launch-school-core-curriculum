@@ -1,3 +1,4 @@
+require 'pry'
 require 'minitest/autorun'
 require "minitest/reporters"
 Minitest::Reporters.use!
@@ -131,6 +132,57 @@ class TodoListTest < MiniTest::Test
     OUTPUT
 
     assert_equal(output, @list.to_s)
+  end
+
+  def test_to_s_2
+    output = <<-OUTPUT.chomp.gsub(/^\s+/, "")
+    ---- Today's Todos ----
+    [ ] Buy milk
+    [X] Clean room
+    [ ] Go to gym
+    OUTPUT
+
+    @list.item_at(1).done!
+
+    assert_equal(output, @list.to_s)
+  end
+
+  def test_to_s_3
+    output = <<-OUTPUT.chomp.gsub(/^\s+/, "")
+    ---- Today's Todos ----
+    [X] Buy milk
+    [X] Clean room
+    [X] Go to gym
+    OUTPUT
+
+    @list.mark_all_done
+
+    assert_equal(output, @list.to_s)
+  end
+
+  def test_each
+    output = "---- #{@list.title} ----\n"
+
+    @list.each do |todo|
+      output << "#{todo}\n"
+    end
+
+    assert_equal(output.chomp, @list.to_s)
+  end
+
+  def test_each_2
+    returned_obj = @list.each(&:to_s)
+
+    assert_equal(@list, returned_obj)
+  end
+
+  def test_select
+    returned_obj = @list.select do |todo|
+      !todo.to_s.scan(/milk/).empty?
+    end
+
+    assert_equal(@todo1, returned_obj.first)
+    refute_equal(@list.object_id, returned_obj.object_id)
   end
 
   private
