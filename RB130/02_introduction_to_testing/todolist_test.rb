@@ -142,7 +142,7 @@ class TodoListTest < MiniTest::Test
     [ ] Go to gym
     OUTPUT
 
-    @list.item_at(1).done!
+    @list.mark_done_at(1)
 
     assert_equal(output, @list.to_s)
   end
@@ -170,7 +170,7 @@ class TodoListTest < MiniTest::Test
     assert_equal(output.chomp, @list.to_s)
   end
 
-  def test_each_2
+  def test_each_returns_original_list
     returned_obj = @list.each(&:to_s)
 
     assert_equal(@list, returned_obj)
