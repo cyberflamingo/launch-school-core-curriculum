@@ -1,4 +1,3 @@
-require 'pry'
 require 'minitest/autorun'
 require "minitest/reporters"
 Minitest::Reporters.use!
@@ -41,12 +40,12 @@ class TodoListTest < MiniTest::Test
   end
 
   def test_shift
-    assert_equal(@todo1, @list.shift)
+    assert_equal(@todos.first, @list.shift)
     assert_equal((@todos.size - 1), @list.size)
   end
 
   def test_pop
-    assert_equal(@todo3, @list.pop)
+    assert_equal(@todos.last, @list.pop)
     assert_equal(@todos.size - 1, @list.size)
   end
 
@@ -59,20 +58,28 @@ class TodoListTest < MiniTest::Test
     @list.mark_all_undone
   end
 
-  def test_type_error
+  def test_add_raise_error
     assert_raises(TypeError) do
       @list.add('not a todo object')
     end
   end
 
-  def test_alias
+  def test_shovel
     todo = Todo.new('Buy smartphone')
-    todos = [todo]
-    list = TodoList.new('Todo List')
+    @todos << todo
+    @list << todo
 
-    list << todo
-    assert_equal(todo, list.first)
-    assert_equal(todos, list.to_a)
+    assert_equal(todo, @list.last)
+    assert_equal(@todos, @list.to_a)
+  end
+
+  def test_add_alias
+    todo = Todo.new('Buy smartphone')
+    @todos << todo
+    @list.add(todo)
+
+    assert_equal(todo, @list.last)
+    assert_equal(@todos, @list.to_a)
   end
 
   def test_item_at
@@ -83,30 +90,32 @@ class TodoListTest < MiniTest::Test
   end
 
   def test_mark_done_at
-    assert_equal(@list.mark_done_at(@index), @list.item_at(@index).done?)
+    @list.mark_done_at(@index)
+    assert_equal(true, @list.item_at(@index).done?)
     assert_raises(IndexError) do
       @list.mark_done_at(@index_error)
     end
   end
 
   def test_mark_undone_at
-    assert_equal(@list.item_at(@index).done?, @list.mark_undone_at(@index))
+    @list.mark_undone_at(@index)
+    assert_equal(false, @list.item_at(@index).done?)
     assert_raises(IndexError) do
       @list.mark_undone_at(@index_error)
     end
   end
 
   def test_done!
-    assert_equal(@todos.all?(&:done?), @list.done?)
+    @list.done!
+    assert_equal(true, @todos.all?(&:done?))
   end
 
   def test_remove_at
     assert_equal(@list.item_at(@index), @list.remove_at(@index))
+    assert_equal(@todos.size - 1, @list.size)
 
     list_range = (-@list.size...@list.size).to_a
     index_error = not_in_range_num(list_range)
-
-    # binding.pry
 
     assert_raises(IndexError) do
       @list.remove_at(index_error)
