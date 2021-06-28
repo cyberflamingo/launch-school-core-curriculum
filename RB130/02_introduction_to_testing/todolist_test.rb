@@ -186,6 +186,41 @@ class TodoListTest < MiniTest::Test
     refute_equal(@list.object_id, returned_obj.object_id)
   end
 
+  def test_find_by_title
+    title = 'Buy milk'
+
+    assert_equal(@todo1, @list.find_by_title(title))
+  end
+
+  def test_all_done
+    done_num = @list.all_done.size
+
+    assert_equal(0, done_num)
+
+    @list.mark_all_done
+    done_num = @list.all_done.size
+
+    assert_equal(3, done_num)
+  end
+
+  def test_all_not_done
+    undone_num = @list.all_not_done.size
+
+    assert_equal(3, undone_num)
+
+    @list.mark_all_done
+    undone_num = @list.all_not_done.size
+
+    assert_equal(0, undone_num)
+  end
+
+  def test_mark_done
+    title = 'Buy milk'
+    @list.mark_done(title)
+
+    assert_equal(true, @list.first.done?)
+  end
+
   private
 
   def not_in_range_num(range_to_exclude)
