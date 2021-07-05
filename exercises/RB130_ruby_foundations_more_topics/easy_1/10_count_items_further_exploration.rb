@@ -1,0 +1,12 @@
+def count(collection)
+  collection.select do |element|
+    yield(element)
+  end.count
+end
+
+p count([1, 2, 3, 4, 5], &:odd?) == 3
+p count([1, 2, 3, 4, 5]) { |value| value % 3 == 1 } == 2
+p count([1, 2, 3, 4, 5]) { |_value| true } == 5
+p count([1, 2, 3, 4, 5]) { |_value| false } == 0
+p count([], &:even?) == 0
+p count(%w(Four score and seven)) { |value| value.size == 5 } == 2
