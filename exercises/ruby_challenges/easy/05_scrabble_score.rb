@@ -1,5 +1,3 @@
-require 'pry'
-
 class Scrabble
   ALPHABET = ('A'..'Z').to_a
   TILE_SCORES = { 1 => ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
