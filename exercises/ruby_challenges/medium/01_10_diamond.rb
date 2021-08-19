@@ -88,53 +88,56 @@ ALPHABET = ('A'..'Z').to_a
 
 class Diamond
   def initialize(letter)
-    @letter = letter
     @diamond = []
-    @midway = ALPHABET.index(@letter)
+    @midway = ALPHABET.index(letter)
     @width = (@midway * 2) + 1
     @middle_space = 1
   end
-
-  attr_reader :diamond
 
   def self.make_diamond(letter)
     return "A\n" if letter == 'A'
 
     raw_diamond = new(letter)
-
-    raw_diamond.top_half
-    raw_diamond.bottom_half
-
-    raw_diamond.diamond.join("\n") + "\n"
+    raw_diamond.make_diamond
   end
 
-  def top_half
-    0.upto(@midway) do |index|
-      letter = ALPHABET[index]
-      if index == 0
-        @diamond << letter.center(@width)
-      else
-        line = letter + (' ' * @middle_space) + letter
+  def make_diamond
+    top_half
+    bottom_half
 
-        @diamond << line.center(@width)
-        @middle_space += 2
-      end
+    diamond.join("\n") + "\n"
+  end
+
+  private
+
+  attr_accessor :diamond, :middle_space
+  attr_reader :midway, :width
+
+  def top_half
+    0.upto(midway) do |index|
+      make_line(index)
+
+      self.middle_space += 2 unless index == 0
     end
   end
 
   def bottom_half
-    @middle_space -= 4
+    self.middle_space -= 4
 
-    (@midway - 1).downto(0) do |index|
-      letter = ALPHABET[index]
-      if index == 0
-        @diamond << letter.center(@width)
-      else
-        line = letter + (' ' * @middle_space) + letter
+    (midway - 1).downto(0) do |index|
+      make_line(index)
 
-        @diamond << line.center(@width)
-        @middle_space -= 2
-      end
+      self.middle_space -= 2 unless index == 0
     end
+  end
+
+  def make_line(i)
+    let = ALPHABET[i]
+
+    diamond << if i == 0
+                 let.center(width)
+               else
+                 (let + (' ' * middle_space) + let).center(width)
+               end
   end
 end
