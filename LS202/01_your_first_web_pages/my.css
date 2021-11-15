@@ -1,0 +1,25 @@
+body {
+  background: yellow;
+}
+
+h1 {
+  color: orange;
+  text-align: center;
+}
+
+strong {
+  color: blue;
+  text-decoration: underline;
+}
+
+em {
+  color: red;
+}
+
+#final-paragraph {
+  text-decoration: underline;
+}
+
+.more-text {
+  color: gray;
+}
