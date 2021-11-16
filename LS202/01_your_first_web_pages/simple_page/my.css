@@ -1,0 +1,27 @@
+body {
+  margin-left: 25px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+#morning-tasks {
+  font-weight: bold;
+}
+
+#afternoon {
+  color: blue;
+}
+
+#afternoon-tasks {
+  font-style: italic;
+}
+
+#evening {
+  color: purple;
+}
+
+li {
+  list-style: none;
+}
