@@ -3,20 +3,20 @@ body {
 }
 
 main li {
-  font-family: monospace;
   color: purple;
+  font-family: monospace;
 }
 
 main ul > li {
   color: green;
 }
 
-article p {
-  color: brown;
-}
-
 p {
   font-size: 18px;
+}
+
+article p {
+  color: brown;
 }
 
 a {

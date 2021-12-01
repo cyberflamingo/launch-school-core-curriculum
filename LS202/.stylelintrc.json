@@ -1,0 +1,42 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-rational-order",
+    "stylelint-8-point-grid"
+  ],
+  "plugins": [
+    "stylelint-high-performance-animation",
+    "stylelint-declaration-block-no-ignored-properties",
+    "stylelint-group-selectors"
+  ],
+  "rules": {
+    "comment-word-disallowed-list": ["TODO", "FIXME", "XXX"],
+    "declaration-block-no-shorthand-property-overrides": true,
+    "declaration-colon-space-after": "always",
+    "declaration-empty-line-before": null,
+    "function-comma-space-after": "never",
+    "function-parentheses-space-inside": "never",
+    "max-nesting-depth": 3,
+    "media-query-list-comma-newline-after": "always",
+    "media-query-list-comma-newline-before": "never-multi-line",
+    "media-query-list-comma-space-after": "always",
+    "number-leading-zero": "never",
+    "plugin/declaration-block-no-ignored-properties": true,
+    "plugin/no-low-performance-animation-properties": true,
+    "plugin/rational-order": [
+      true,
+      {
+        "empty-line-between-groups": true
+      }
+    ],
+    "plugin/stylelint-group-selectors": true,
+    "selector-attribute-name-disallowed-list": ["class", "id", "/^data-/"],
+    "selector-list-comma-newline-before": "never-multi-line",
+    "selector-max-attribute": 1,
+    "selector-max-id": 1,
+    "selector-max-type": 3,
+    "selector-max-universal": 0,
+    "value-list-comma-space-after": "always"
+  },
+  "defaultSeverity": "warning"
+}

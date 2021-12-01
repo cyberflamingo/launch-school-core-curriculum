@@ -1,0 +1,21 @@
+{
+  "useTab": false,
+  "tabWidth": 2,
+  "endOfLine": "lf",
+  "printWidth": 72,
+
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "printWidth": 120
+      }
+    },
+    {
+      "files": ["*.json", "*.yaml"],
+      "options": {
+        "printWidth": 80
+      }
+    }
+  ]
+}

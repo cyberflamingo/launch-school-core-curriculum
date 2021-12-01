@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "prettier": "^2.5.0",
+    "stylelint": "^14.1.0",
+    "stylelint-8-point-grid": "^2.1.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^24.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
+    "stylelint-group-selectors": "^1.0.8",
+    "stylelint-high-performance-animation": "^1.6.0"
+  }
+}
