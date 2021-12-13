@@ -1,7 +1,7 @@
 {
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-rational-order",
+    "stylelint-config-recess-order",
     "stylelint-8-point-grid"
   ],
   "plugins": [
@@ -23,12 +23,6 @@
     "number-leading-zero": "never",
     "plugin/declaration-block-no-ignored-properties": true,
     "plugin/no-low-performance-animation-properties": true,
-    "plugin/rational-order": [
-      true,
-      {
-        "empty-line-between-groups": true
-      }
-    ],
     "plugin/stylelint-group-selectors": true,
     "selector-attribute-name-disallowed-list": ["class", "id", "/^data-/"],
     "selector-list-comma-newline-before": "never-multi-line",

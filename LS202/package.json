@@ -1,9 +1,8 @@
 {
   "devDependencies": {
-    "prettier": "^2.5.0",
-    "stylelint": "^14.1.0",
+    "prettier": "^2.5.1",
     "stylelint-8-point-grid": "^2.1.0",
-    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-recess-order": "^3.0.0",
     "stylelint-config-standard": "^24.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
     "stylelint-group-selectors": "^1.0.8",
