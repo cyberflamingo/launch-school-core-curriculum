@@ -1,0 +1,164 @@
+/* General */
+html,
+body {
+  font-family: "Helvetica Black", Helvetica, Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  background: #fff;
+}
+
+body {
+  box-sizing: border-box;
+  width: 680px;
+  padding: 0.6em 0.9em;
+  margin: 0.5em;
+  border: 2px solid black;
+}
+
+/* Header */
+h1 {
+  margin: 0;
+  font-size: 3.5em;
+}
+
+header {
+  width: 100%;
+}
+
+header p {
+  margin: 0;
+  font-size: 1.75em;
+}
+
+header h2 {
+  padding: 0.3em 0;
+  margin: 0.2em 0;
+  font-size: 1.75em;
+  border-top: 1.1em solid black;
+  border-bottom: 1px solid black;
+}
+
+header dl {
+  display: inline-block;
+  width: 50%;
+  padding: 0 0 0.3em;
+  margin: 0;
+}
+
+header dt,
+header dd,
+tbody dt,
+tbody dd {
+  display: inline;
+}
+
+thead {
+  border-top: 0.5em solid black;
+}
+
+header dt {
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+header dd {
+  margin-left: 0.3em;
+  font-size: 1.75em;
+}
+
+tbody dl {
+  margin: 0;
+  text-align: left;
+}
+
+header dl + dl,
+thead th,
+tbody:nth-child(3) td + td {
+  text-align: right;
+}
+
+header dl + dl dt,
+tr td dl {
+  font-weight: normal;
+}
+
+/* Table */
+table {
+  font-size: 1.75em;
+  border-collapse: collapse;
+}
+
+tr th,
+tr td {
+  border-top: 1px solid black;
+}
+
+tr:last-of-type {
+  border: 0;
+}
+
+tbody th {
+  text-align: left;
+}
+
+tbody th + td,
+tbody td + td {
+  font-weight: bold;
+  text-align: right;
+}
+
+tbody:nth-child(3) {
+  border-top: 0.75em solid black;
+}
+
+tbody:nth-child(3) td {
+  font-weight: normal;
+  text-align: left;
+}
+
+tbody .indent {
+  padding-left: 0.4em;
+  border-top: 0;
+}
+
+tbody dd {
+  margin-left: 0;
+  font-weight: normal;
+}
+
+/* Table Footer */
+tfoot td {
+  padding: 0.5em 0 0.5em 0.7em;
+  font-size: 0.9em;
+  text-indent: -0.7em;
+}
+
+/* Second Table */
+table + table {
+  width: 100%;
+  font-size: 1.4em;
+}
+
+table + table thead,
+table + table tr th,
+table + table tr td {
+  border-top: 0;
+}
+
+table + table thead th,
+table + table tbody td + td {
+  text-align: left;
+}
+
+table + table thead th,
+table + table td + td {
+  font-weight: normal;
+}
+
+table + table tr th {
+  border-bottom: 1px solid black;
+}
+
+table + table tbody .indent {
+  padding-left: 2rem;
+}
