@@ -56,6 +56,14 @@ thead {
   border-top: 0.5em solid black;
 }
 
+header dl + dl {
+  text-align: right;
+}
+
+header dl + dl dt {
+  font-weight: normal;
+}
+
 header dt {
   font-size: 1.75em;
   font-weight: bold;
@@ -66,26 +74,19 @@ header dd {
   font-size: 1.75em;
 }
 
-tbody dl {
-  margin: 0;
-  text-align: left;
-}
-
-header dl + dl,
-thead th,
-tbody:nth-child(3) td + td {
-  text-align: right;
-}
-
-header dl + dl dt,
-tr td dl {
-  font-weight: normal;
-}
-
 /* Table */
 table {
   font-size: 1.75em;
   border-collapse: collapse;
+}
+
+thead sup {
+  vertical-align: top;
+}
+
+thead th,
+tbody:nth-child(3) td + td {
+  text-align: right;
 }
 
 tr th,
@@ -93,11 +94,20 @@ tr td {
   border-top: 1px solid black;
 }
 
+tr td dl {
+  font-weight: normal;
+}
+
 tr:last-of-type {
   border: 0;
 }
 
 tbody th {
+  text-align: left;
+}
+
+tbody dl {
+  margin: 0;
   text-align: left;
 }
 
