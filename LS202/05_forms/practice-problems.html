@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <form action="#" method="post">
+    <fieldset>
+      <dl>
+        <dt><label for="first_name">First Name</label></dt>
+        <dd><input id="first_name" name="first_name" type="text"
+        required=""></dd>
+        <dt><label for="last_name">Last Name</label></dt>
+        <dd><input id="last_name" name="last_name" type="text"
+        required=""></dd>
+        <dt><label for="email">Email Address</label></dt>
+        <dd><input id="email" name="email" type="email"
+        autocapitalize="none" autocomplete="off" autocorrect="off"
+        required=""></dd>
+        <dt><label for="phone">Phone Number</label></dt>
+        <dd><input id="phone" name="phone" type="tel" placeholder=
+        "###-###-####" required=""></dd>
+        <dt><label for="phone_type">Phone Type</label></dt>
+        <dd><select id="phone_type" name="phone_type">
+          <option value="home" selected>
+            Home
+          </option>
+          <option value="business">
+            Business
+          </option>
+          <option value="mobile">
+            Mobile
+          </option>
+        </select></dd>
+        <dt><label for="message">Message</label></dt>
+        <dd>
+        <textarea id="message" name="message" cols="80"
+        placeholder="Type your message here." rows=
+        "6"></textarea></dd>
+      </dl><input type="submit" value="Send">
+    </fieldset>
+  </form>
+</body>
+</html>

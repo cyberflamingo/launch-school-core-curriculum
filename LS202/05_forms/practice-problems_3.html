@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <form action="#" method="post">
+    <fieldset>
+      <dl>
+        <dt><label for="title">Movie</label></dt>
+        <dd><select id="title" name="title" size="4">
+          <option value="Looper" selected>
+            Looper
+          </option>
+          <option value="Frozen">
+            Frozen
+          </option>
+          <option value="Tommy Boy">
+            Tommy Boy
+          </option>
+          <option value="Alien" selected>
+            Alien
+          </option>
+        </select></dd>
+        <dt><label for="rating">Rating</label></dt>
+        <dd><input id="rating" name="rating" type="number" max="5"
+        min="1"></dd>
+      </dl>
+      <div>
+        <label><input id="favorite" name="favorite" type="checkbox"
+        checked>Add to my favorites</label>
+      </div><input type="submit" value="Rate movie">
+    </fieldset>
+  </form>
+</body>
+</html>
