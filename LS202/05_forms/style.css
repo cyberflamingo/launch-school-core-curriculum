@@ -12,6 +12,35 @@ fieldset {
   border: none;
 }
 
+dl.boxed {
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+dl.one-half {
+  width: 50%;
+}
+
+dl.left {
+  padding-right: 0.4em;
+}
+
+dl.right {
+  padding-left: 0.4em;
+}
+
+dl.both {
+  padding: 0 0.4em;
+}
+
+dl.one-tenth {
+  width: 10%;
+}
+
+dl.four-tenth {
+  width: 40%;
+}
+
 dt {
   margin-bottom: 0.4em;
 }

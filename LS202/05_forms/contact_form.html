@@ -8,18 +8,26 @@
 <body>
   <form action="#" method="post">
     <fieldset>
-      <dl>
+      <dl class="boxed one-half left">
         <dt><label for="first_name">First Name</label></dt>
         <dd><input id="first_name" name="first_name" type=
         "text"></dd>
+      </dl><!--
+      --><dl class="boxed one-half right">
         <dt><label for="last_name">Last Name</label></dt>
         <dd><input id="last_name" name="last_name" type=
         "text"></dd>
+      </dl>
+      <dl>
         <dt><label for="email">Email Address</label></dt>
         <dd><input id="email" name="email" type="email"
         placeholder="john@doe.com"></dd>
+      </dl><!--
+      --><dl class="boxed one-half left">
         <dt><label for="city">City</label></dt>
         <dd><input id="city" name="city" type="text"></dd>
+      </dl><!--
+      --><dl class="boxed one-tenth both">
         <dt><label for="state">State</label></dt>
         <dd><select id="state" name="state">
           <option>
@@ -176,6 +184,8 @@
             WY
           </option>
         </select></dd>
+      </dl><!--
+      --><dl class="boxed four-tenth right">
         <dt><label for="zip">Zip</label></dt>
         <dd><input id="zip" name="zip" type="text" pattern=
         "[0-9]{5}" placeholder="32533"></dd>
