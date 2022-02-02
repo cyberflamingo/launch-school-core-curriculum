@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style>
+  #positioned {
+    position: fixed;
+    top: 20px;
+    /* right: 0; */
+    left: 50%;
+    z-index: 2;
+    box-sizing: border-box;
+    width: 400px;
+    padding: 30px 15px;
+    margin-left: -200px;
+    background-color: #ffc;
+  }
+
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1; /* 1 must be < 2 */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0 0 0 / 60%);
+  }
+  #positioned span {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    background-color: pink;
+  }
+  </style>
+</head>
+<body>
+  <section>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Vestibulum dapibus fermentum ante quis vulputate. Cras velit
+    ante, molestie id convallis pretium, molestie ac urna. Morbi
+    sit amet egestas magna, id vestibulum turpis. Phasellus
+    vulputate, libero quis vehicula tristique, lectus elit finibus
+    lacus, non blandit nunc nunc id metus. Sed tempus ut turpis nec
+    interdum. Integer non porttitor tellus, id pulvinar dui. Proin
+    tincidunt aliquet egestas. Nunc maximus risus ac faucibus
+    fermentum. Vivamus congue ut ipsum eget egestas. Phasellus
+    ultrices erat quis ligula pulvinar rhoncus. Nulla mollis, erat
+    id facilisis tincidunt, diam enim interdum arcu, a pellentesque
+    turpis tellus a velit. Sed viverra lobortis libero, et maximus
+    magna vestibulum lobortis. Vivamus quis commodo leo.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Vestibulum dapibus fermentum ante quis vulputate. Cras velit
+    ante, molestie id convallis pretium, molestie ac urna. Morbi
+    sit amet egestas magna, id vestibulum turpis. Phasellus
+    vulputate, libero quis vehicula tristique, lectus elit finibus
+    lacus, non blandit nunc nunc id metus. Sed tempus ut turpis nec
+    interdum. Integer non porttitor tellus, id pulvinar dui. Proin
+    tincidunt aliquet egestas. Nunc maximus risus ac faucibus
+    fermentum. Vivamus congue ut ipsum eget egestas. Phasellus
+    ultrices erat quis ligula pulvinar rhoncus. Nulla mollis, erat
+    id facilisis tincidunt, diam enim interdum arcu, a pellentesque
+    turpis tellus a velit. Sed viverra lobortis libero, et maximus
+    magna vestibulum lobortis. Vivamus quis commodo leo.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Vestibulum dapibus fermentum ante quis vulputate. Cras velit
+    ante, molestie id convallis pretium, molestie ac urna. Morbi
+    sit amet egestas magna, id vestibulum turpis. Phasellus
+    vulputate, libero quis vehicula tristique, lectus elit finibus
+    lacus, non blandit nunc nunc id metus. Sed tempus ut turpis nec
+    interdum. Integer non porttitor tellus, id pulvinar dui. Proin
+    tincidunt aliquet egestas. Nunc maximus risus ac faucibus
+    fermentum. Vivamus congue ut ipsum eget egestas. Phasellus
+    ultrices erat quis ligula pulvinar rhoncus. Nulla mollis, erat
+    id facilisis tincidunt, diam enim interdum arcu, a pellentesque
+    turpis tellus a velit. Sed viverra lobortis libero, et maximus
+    magna vestibulum lobortis. Vivamus quis commodo leo.</p>
+  </section>
+  <div id="positioned">
+    I'm positioned!
+    <span></span>
+  </div>
+  <div id="overlay"></div>
+</body>
+</html>
