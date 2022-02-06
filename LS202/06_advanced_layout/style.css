@@ -1,0 +1,244 @@
+/* General */
+html,
+body {
+  font-family: "Helvetica Black", Helvetica, Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  background: #fff;
+}
+
+body {
+  color: #545459;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 1000px;
+  padding: 0.6em 0.9em;
+  margin: 0 auto;
+  border: 2px solid #999;
+}
+
+h1,
+h2,
+h3 {
+  color: #ce4a4a;
+}
+
+p {
+  margin-bottom: 1.5em;
+  line-height: 2.2;
+}
+
+a {
+  color: unset;
+  text-decoration-line: unset;
+}
+
+.border {
+  padding: 2em;
+  margin: 2em;
+  border: 2px dashed #555;
+}
+
+.border.inline-float a {
+  float: left;
+  margin: 1em;
+  border: 3px solid darkgreen;
+}
+
+.border.inline-float {
+  overflow: auto;
+}
+
+.margin {
+  margin: 1em;
+}
+
+.padding {
+  padding: 2em;
+  color: white;
+  background: green;
+}
+
+.bl-normal {
+  color: white;
+  background-color: dodgerblue;
+}
+
+.bl-height {
+  height: 3.75em;
+  padding: 1.25em;
+  margin: 1.25em;
+  color: white;
+  background-color: green;
+}
+
+.bl-width {
+  width: 5.6em;
+  color: white;
+  background-color: tomato;
+}
+
+.bl-height-width {
+  width: 11em;
+  height: 7.5em;
+  padding: 1.25em;
+  margin: 1.25em;
+  color: white;
+  background-color: pink;
+}
+
+.wrapper {
+  margin-bottom: 1.25em;
+}
+
+.fl-wrapper {
+  width: 100%;
+}
+
+.fl-wrapper::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.fl-left {
+  float: left;
+  color: white;
+  background-color: dodgerblue;
+  border: 1px solid red;
+}
+
+.fl-right {
+  float: right;
+  color: white;
+  background-color: tomato;
+  border: 1px solid red;
+}
+
+.fl-left.bl-height-width {
+  width: 40%;
+  height: initial;
+  text-align: center;
+  background-color: tomato;
+  border: none;
+}
+
+.fl-right.bl-height-width {
+  width: 50%;
+  height: initial;
+  text-align: center;
+  background-color: dodgerblue;
+  border: none;
+}
+
+.bl-a {
+  display: block;
+  padding: 0.6em;
+  margin: 0.6em;
+  color: white;
+  text-align: center;
+  background-color: dodgerblue;
+}
+
+.menu,
+.floats h1 {
+  text-align: center;
+}
+
+.menu a {
+  display: inline-block;
+  width: 20%;
+  padding: 1.25em 1.8em;
+  margin: 1.25em 0.6em;
+  color: white;
+  text-align: center;
+  background-color: dodgerblue;
+}
+
+hr {
+  border: none;
+  border-top: 2px dashed #545459;
+}
+
+.fl-box {
+  float: left;
+  width: 28em;
+  height: 6.25em;
+  font-weight: bold;
+  line-height: 6.25em;
+  color: white;
+  text-align: center;
+}
+
+.fl-1 {
+  width: 50%;
+  background-color: tomato;
+}
+
+.fl-2 {
+  width: 50%;
+  background-color: dodgerblue;
+}
+
+.fl-3 {
+  width: 100%;
+  height: 3em;
+  margin-bottom: 2em;
+  line-height: 50px;
+  background-color: darkgreen;
+}
+
+.ul-position {
+  padding-left: 5em;
+  margin-bottom: 3em;
+  font-style: italic;
+}
+
+.ul-position li {
+  margin: 0.5em 0;
+}
+
+.bl-fixed {
+  position: fixed;
+  bottom: 3em;
+  left: 2em;
+  width: 14em;
+  padding: 1.5em 2.2em;
+  color: white;
+  text-align: center;
+  background-color: dodgerblue;
+  border-radius: 1em;
+}
+
+.bl-retative {
+  position: relative;
+  top: 2em;
+  left: -4em;
+  width: 18.75em;
+  padding: 1.5em 2.2em;
+  color: white;
+  text-align: center;
+  background-color: tomato;
+  border-radius: 1em;
+}
+
+.pos-absolute {
+  position: relative;
+}
+
+.bl-absolute {
+  position: absolute;
+  top: -2em;
+  left: 17em;
+  width: 200px;
+  padding: 1.5em 2.2em;
+  color: white;
+  text-align: center;
+  background-color: darkgreen;
+  border-radius: 1em;
+}
