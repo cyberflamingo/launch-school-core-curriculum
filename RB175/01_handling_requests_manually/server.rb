@@ -5,7 +5,7 @@ def parse_request(request_line)
   http_method, path_and_params, _http = request_line.split(" ")
   path, params = path_and_params.split("?")
 
-  params = params.split("&").each_with_object({}) do |pair, hash|
+  params = (params || "").split("&").each_with_object({}) do |pair, hash|
     key, value = pair.split("=")
     hash[key] = value
   end
@@ -22,19 +22,29 @@ loop do
 
   next if !request_line || request_line =~ /favicon/
 
-  _http_method, _path, params = parse_request(request_line)
+  http_method, path, params = parse_request(request_line)
 
   client.puts "HTTP/1.1 200 OK"
-  client.puts "Content-Type: text/plain\r\n\r\n"
-  client.puts request_line
+  client.puts "Content-Type: text/html\r\n\r\n"
+  client.puts
+  client.puts "<html>"
+  client.puts "<body>"
+  client.puts "<pre>"
+  client.puts http_method
+  client.puts path
+  client.puts params
+  client.puts "</pre>"
 
-  rolls = params["rolls"].to_i
-  sides = params["sides"].to_i
+  client.puts "<h1>Counter</h1>"
 
-  rolls.times do
-    roll = rand(sides) + 1
-    client.puts roll
-  end
+  number = params["number"].to_i
+  client.puts "<p>The current number is #{number}.</p>"
+
+  client.puts "<a href='?number=#{number + 1}'>Add one</a>"
+  client.puts "<a href='?number=#{number - 1}'>Subtract one</a>"
+
+  client.puts "</body>"
+  client.puts "</html>"
 
   client.close
 end
