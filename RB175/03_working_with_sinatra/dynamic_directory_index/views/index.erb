@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Public</title>
+</head>
+<body>
+  <ul>
+    <% @static_files.each do |file| %>
+    <li><a href="/<%= file %>"><%= file %></a></li>
+    <% end %>
+  </ul>
+  <a href="<%= @sort_url %>"><%= @sort_link %></a>
+</body>
+</html>
