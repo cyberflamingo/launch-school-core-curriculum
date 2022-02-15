@@ -26,6 +26,7 @@ end
 
 get "/search" do
   @results = chapters_matching(params[:query])
+
   erb :search
 end
 
@@ -39,9 +40,14 @@ end
 
 helpers do
   def in_paragraphs(text)
-    text.split("\n\n").map do |paragraph|
-      "<p>#{paragraph}</p>"
-    end.join end
+    text.split("\n\n").map.with_index do |paragraph, index|
+      "<p id='paragraph#{index}'>#{paragraph}</p>"
+    end.join
+  end
+
+  def highlight(paragraph, query)
+    paragraph.gsub(query, "<strong>#{query}</strong>")
+  end
 end
 
 # Calls the block for each chapter, passing that chapter's number, name, and
@@ -57,13 +63,19 @@ end
 # This method returns an Array of Hashes representing chapters that match the
 # specified query. Each Hash contain values for its :name and :number keys.
 def chapters_matching(query)
-  results = []
+  ret = []
 
-  return results if !query || query.empty?
+  return ret if !query || query.empty?
 
   each_chapter do |number, name, contents|
-    results << { number: number, name: name } if contents.include?(query)
+    matches = {}
+
+    contents.split("\n\n").each_with_index do |paragraph, position|
+      matches[position] = paragraph if paragraph.include?(query)
+    end
+
+    ret << { number: number, name: name, paragraphs: matches } if matches.any?
   end
 
-  results
+  ret
 end
