@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= @title %></title>
+
+    <link rel="stylesheet" href="/stylesheets/pure-min.css">
+    <link rel="stylesheet" href="/stylesheets/book_viewer.css">
+</head>
+
+<body>
+
+  <div id="layout">
+      <div id="main">
+        <div class="header">
+          <h1>Code Challenge: Users and Interests </h1>
+        </div>
+
+        <div class="content">
+          <%= yield %>
+
+          <p>There are <%= @users_names.length %> users with a total of <%= count_interests %> interests.</p>
+        </div>
+      </div>
+  </div>
+
+</body>
+</html>

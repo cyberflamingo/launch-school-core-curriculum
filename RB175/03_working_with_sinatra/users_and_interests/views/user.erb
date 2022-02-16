@@ -1,0 +1,18 @@
+<h2 class="content-subhead"><%= @user_name.capitalize %>'s Profile</h2>
+
+<ul>
+  <li>Email: <%= @email %></li>
+  <li>Interests: <%= @interests.join(', ') %></li>
+</ul>
+
+<h2 class="content-subhead">User's list</h2>
+
+<div class="pure-menu">
+  <ul class="pure-menu-list">
+    <% @users_names.reject { |n| n == @user_name.to_sym }.each do |name| %>
+    <li class="pure-menu-item">
+      <a href="/users/<%= name %>" class="pure-menu-link"><%= name.capitalize%></a>
+    </li>
+    <% end %>
+  </ul>
+</div>
