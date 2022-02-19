@@ -1,0 +1,18 @@
+<% if session[:success] %>
+  <div class="flash success">
+    <p><%= session.delete(:success) %></p>
+  </div>
+<% end %>
+
+<ul id="lists">
+  <% @lists.each do |list| %>
+    <li>
+      <a>
+        <h2><%= list[:name] %></h2>
+        <p><%= list[:todos].size %></p>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<a href="/lists/new">New List</a>

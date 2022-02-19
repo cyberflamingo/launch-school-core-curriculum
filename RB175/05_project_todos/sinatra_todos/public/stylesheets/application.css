@@ -1,0 +1,414 @@
+a {
+  color: inherit;
+  text-decoration: none; 
+}
+
+body {
+  font: normal 20px "PT Sans", Helvetica, Arial, sans-serif;
+  color: #3f3f3f;
+  background: #ffffff; 
+}
+
+body > header {
+  max-width: 1000px;
+  padding: 85px 0 35px 0;
+  margin: 0 auto; 
+}
+
+body > header h1 {
+  display: inline-block;
+  width: 38%;
+  font-size: 30px;
+  color: #dd5f4f; 
+}
+
+body > header .actions {
+  display: inline-block;
+  width: 60%;
+  text-align: right; 
+}
+
+body > header .actions a {
+  -webkit-transition: color 200ms ease;
+  -moz-transition: color 200ms ease;
+  -o-transition: color 200ms ease; 
+}
+
+body > header .actions a:hover {
+  color: #dd5f4f; 
+}
+
+body > header .actions a.add:before {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 0 7px 0 0;
+  vertical-align: -6px;
+  content: "";
+  background: transparent url("../images/icon_add.png") 0 0 no-repeat;
+  -webkit-transition: transform 200ms linear;
+  -moz-transition: transform 200ms linear;
+  -o-transition: transform 200ms linear; 
+}
+
+body > header .actions a.add:hover:before {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1); 
+}
+
+body > header .actions a.list:before {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  margin: 0 7px 0 0;
+  vertical-align: -6px;
+  content: "";
+  background: transparent url("../images/icon_list.png") 0 0 no-repeat; 
+}
+
+
+main {
+  max-width: 1000px;
+  padding: 0 0 40px 0;
+  margin: 0 auto; 
+}
+
+main > form {
+  margin-top: 1.5em; 
+}
+
+
+form dt {
+  padding: 0 0 25px 0; 
+}
+
+form dd {
+  padding: 0 0 15px 0; 
+}
+
+form input[type="text"] {
+  width: 100%;
+  height: 58px;
+  padding: 15px 20px;
+  font: normal 20px "PT Sans", Helvetica, Arial, sans-serif;
+  border: 1px solid #a4a4a4;
+  border-radius: 8px;
+  box-sizing: border-box; 
+}
+
+form input[type="submit"] {
+  padding: 12px 45px;
+  margin: 0 40px 0 0;
+  font: normal 24px "PT Sans", Helvetica, Arial, sans-serif;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  background: #dd5f4f;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -webkit-transition: background-color 200ms ease;
+  -moz-transition: background-color 200ms ease;
+  -o-transition: background-color 200ms ease; 
+}
+
+form input[type="submit"]:hover {
+  background-color: #d13b28;
+  cursor: pointer; 
+}
+
+form fieldset.actions a {
+  color: #666666;
+  -webkit-transition: color 200ms ease;
+  -moz-transition: color 200ms ease;
+  -o-transition: color 200ms ease; 
+}
+
+form fieldset.actions a:hover {
+  color: #b00b00; 
+}
+
+.flash {
+  max-width: 960px;
+  padding: 10px 20px;
+  margin: 20px auto 1.5em auto;
+  color: #3399cc;
+  background: #CBE5F2; 
+}
+
+.flash p {
+  font-size: 14px;
+  font-weight: bold; 
+}
+
+.flash.error {
+  color: #ff6633;
+  background: #FFCFBF; 
+}
+
+.flash.success {
+  color: #33cc99;
+  background: #CBF2E5; 
+}
+
+#no_list {
+  padding: 128px 0 0 0;
+  text-align: center;
+  background: transparent url("../images/arrow_new_list.png") 85% 0 no-repeat; 
+}
+
+#lists li {
+  position: relative;
+  padding: 18px 25px 18px 57px;
+  margin: 0 0 10px 0;
+  border-radius: 8px;
+  background: #f6f6f6; 
+}
+
+#lists li:before {
+  position: absolute;
+  top: 50%;
+  left: 23px;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 0;
+  content: "";
+  border-radius: 100%;
+  background: #dd5f4f; 
+}
+
+#lists li.complete:before {
+  width: 28px;
+  height: 28px;
+  margin: -15px 0 0 -7px;
+  border: 1px solid #666666;
+  border-radius: 4px;
+  background: #ffffff url("../images/icon_check.png") 50% 50% no-repeat; 
+}
+
+#lists li.complete h2 {
+  color: #bebebe;
+  text-decoration: line-through; 
+}
+
+#lists li.complete p {
+  color: #bebebe; 
+}
+
+#lists a {
+  display: block;
+  color: inherit; 
+}
+
+#lists h2 {
+  display: inline-block;
+  width: 95%; 
+}
+
+#lists p {
+  display: inline-block;
+  width: 5%;
+  font-size: 0.9em;
+  float: right;
+  color: #666666; 
+}
+
+#todos header {
+  padding: 15px 20px;
+  border-radius: 6px;
+  background: #f6f6f6; 
+}
+
+#todos header h2 {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle; 
+}
+
+@media screen and (max-width: 650px) {
+  #todos header h2 {
+    display: block;
+    width: auto;
+    padding: 0 0 15px 0; 
+  }
+}
+
+#todos header ul {
+  display: inline-block;
+  width: 49%;
+  text-align: right;
+  vertical-align: middle; 
+}
+
+@media screen and (max-width: 650px) {
+  #todos header ul {
+    display: block;
+    width: auto;
+    text-align: left; 
+  }
+}
+
+#todos header ul li {
+  display: inline-block;
+  margin: 0 0 0 40px; 
+}
+
+@media screen and (max-width: 650px) {
+  #todos header ul li {
+    margin: 0 40px 0 0; 
+  }
+}
+
+#todos header ul a {
+  display: block; 
+}
+
+#todos header ul a:before {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin: 0 7px 0 0;
+  vertical-align: -6px;
+  content: ""; 
+}
+
+#todos header ul a.edit {
+  -webkit-transition: background-color 200ms ease;
+  -moz-transition: background-color 200ms ease;
+  -o-transition: background-color 200ms ease;
+}
+
+#todos header ul a.edit:hover {
+  color: #dd5f4f;
+}
+
+#todos header ul a.edit:before {
+  border: 2px solid transparent;
+  background: transparent url("../images/icon_edit.png") 0 0 no-repeat; 
+}
+
+#todos header ul button {
+  display: inline-block;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #3f3f3f;
+  font: normal 20px "PT Sans", Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  -webkit-transition: color 200ms ease;
+  -moz-transition: color 200ms ease;
+  -o-transition: color 200ms ease; 
+}
+
+#todos header ul button:before {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin: 0 7px 0 0;
+  vertical-align: -6px;
+  content: ""; 
+}
+
+#todos header ul button.check:hover {
+  color: #00B059; 
+}
+
+#todos header ul button.check:before {
+  border: 2px solid #3f3f3f;
+  background: transparent url("../images/icon_check.png") 50% 50% no-repeat; 
+}
+
+#todos header ul button.delete:hover {
+  color: #b00b00; 
+}
+
+#todos header ul button.delete:before {
+  border: 2px solid transparent;
+  background: transparent url("../images/icon_delete.png") 0 0 no-repeat; 
+}
+
+#todos.complete header h2 {
+  color: #bebebe;
+  text-decoration: line-through; 
+}
+
+#todos.complete header .check {
+  display: none; 
+}
+
+#todos > ul {
+  padding: 10px 0 50px 0; 
+}
+
+#todos > ul li {
+  position: relative;
+  padding: 10px 0;
+  margin: 0 0 25px 60px;
+  border-bottom: 1px solid #d7d7d7; 
+}
+
+#todos > ul li a {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  overflow: hidden;
+  text-indent: -8685px; 
+}
+
+#todos > ul li form {
+  position: absolute;
+  top: 50%;
+  z-index: 1; 
+}
+
+#todos > ul li .check {
+  left: -45px;
+  height: 30px;
+  margin: -15px 0 0 0; 
+}
+
+#todos > ul li .check [type="submit"] {
+  height: 28px;
+  width: 28px;
+  color: transparent;
+  border: 1px solid #666666;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer; 
+}
+
+#todos > ul li .check [type="submit"]:hover {
+  border-color: #dd5f4f; 
+}
+
+#todos > ul li .delete {
+  right: 20px;
+  width: 24px;
+  height: 27px;
+  margin: -12px 0 0 0;
+  opacity: 0.4;
+  background: transparent url("../images/icon_delete.png") 0 3px no-repeat; 
+}
+
+#todos > ul li .delete [type="submit"] {
+  width: 24px;
+  height: 24px;
+  color: transparent;
+  background-color: transparent;
+  cursor: pointer;
+  border: none; 
+}
+
+#todos > ul li .delete:hover {
+  opacity: 1; 
+}
+
+#todos > ul li.complete h3 {
+  color: #bebebe;
+  text-decoration: line-through; 
+}
+
+#todos > ul li.complete .check {
+  background: transparent url("../images/icon_check.png") 50% 50% no-repeat; 
+}
