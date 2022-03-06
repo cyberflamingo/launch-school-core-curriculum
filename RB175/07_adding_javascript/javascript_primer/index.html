@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Let's Have Fun!</h1><button id="btn1">#btn1</button>
+      <button id="btn2">#btn2</button> <button id=
+      "btn3">#btn3</button> <button id="btn4">#btn4</button>
+    </div>
+    <div class="row">
+      <div class="panel panel-primary" id="panel1">
+        <div class="panel-heading">
+          #panel1
+        </div>
+      </div>
+      <div class="panel panel-primary" id="panel2">
+        <div class="panel-heading">
+          #panel2
+        </div>
+      </div>
+      <div class="panel panel-primary" id="panel3">
+        <div class="panel-heading">
+          #panel3
+        </div>
+      </div>
+      <div class="panel panel-primary" id="panel4">
+        <div class="panel-heading">
+          #panel4
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src=
+  "https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#panel1').hide(300).show(1000).hide(300).show(1000);
+
+      $('#panel1').css({ // Javascript Object
+        color: 'red',
+        fontWeight: 'bold'
+      });
+
+      $('#panel2').css({
+        opacity: '0.5'
+      });
+
+      $('#btn1').html('my button');
+      $('#btn2').on('click', function() {
+        $('#panel2').slideToggle(200);
+      });
+
+    });
+  </script>
+</body>
+</html>
