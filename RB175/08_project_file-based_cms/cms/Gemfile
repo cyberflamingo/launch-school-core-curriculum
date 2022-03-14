@@ -9,3 +9,8 @@ gem "sinatra", "~> 2.2"
 gem "sinatra-contrib", "~> 2.2"
 
 gem "erubis", "~> 2.7"
+
+gem "minitest", "~> 5.15"
+gem "rack-test", "~> 1.1"
+
+gem "redcarpet", "~> 3.5"
