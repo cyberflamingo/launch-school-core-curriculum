@@ -33,6 +33,9 @@ def load_file_content(path)
     content
   when ".md"
     erb render_markdown(content)
+  else
+    # TODO: Handle when user don't provide one of the extension below
+    redirect "/"
   end
 end
 
@@ -43,6 +46,27 @@ get "/" do
   end
 
   erb :index
+end
+
+get "/new" do
+  erb :new
+end
+
+post "/create" do
+  filename = params[:filename].to_s
+
+  if filename.empty?
+    session[:message] = "A name is required."
+    status 422
+    erb :new
+  else
+    file_path = File.join(data_path, filename)
+
+    File.write(file_path, "")
+    session[:message] = "#{params[:filename]} has been created."
+
+    redirect "/"
+  end
 end
 
 get "/:filename" do
