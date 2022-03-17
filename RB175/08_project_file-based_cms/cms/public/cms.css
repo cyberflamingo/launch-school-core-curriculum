@@ -7,3 +7,7 @@ body {
   padding: 8px;
   background: #ff9;
 }
+
+form.inline {
+  display: inline;
+}
