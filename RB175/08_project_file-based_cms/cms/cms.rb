@@ -2,6 +2,7 @@ require "redcarpet"
 require "sinatra"
 require "sinatra/reloader" if development?
 require "tilt/erubis"
+require "yaml"
 
 configure do
   enable :sessions
@@ -47,6 +48,17 @@ def load_file_content(path)
     # TODO: Handle when user don't provide one of the extension below
     redirect "/"
   end
+end
+
+def load_user_credentials
+  credentials_path = if ENV["RACK_ENV"] == "test"
+                       # rubocop:disable Style/ExpandPathArguments
+                       File.expand_path("../test/users.yaml", __FILE__)
+                     else
+                       File.expand_path("../users.yaml", __FILE__)
+                       # rubocop:enable Style/ExpandPathArguments
+                     end
+  YAML.load_file(credentials_path)
 end
 
 get "/" do
@@ -128,7 +140,18 @@ post "/:filename/delete" do
 end
 
 get "/users/signin" do
-  erb :signin
+  credentials = load_user_credentials
+  username = params[:username]
+
+  if credentials.key?(username) && credentials[username] == params[:password]
+    session[:username] = username
+    session[:message] = "Welcome!"
+    redirect "/"
+  else
+    session[:message] = "Invalid credentials"
+    status 422
+    erb :signin
+  end
 end
 
 post "/users/signin" do
