@@ -115,6 +115,9 @@ end
 # Access: http://127.0.0.1:4567/view?filename=../users.yaml
 # get "/view" do
 #   file_path = File.join(data_path, params[:filename])
+#   # Path traversal occurs in the line above. One way to mitigate risk is to
+#   # strip off anything other than filename and extension:
+#   # file_path = File.join(data_path, File.basename(params[:filename]))
 
 #   if File.exist?(file_path)
 #     load_file_content(file_path)
