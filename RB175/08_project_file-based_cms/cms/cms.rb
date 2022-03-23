@@ -46,6 +46,10 @@ def load_file_content(path)
   when ".md"
     erb render_markdown(content)
   else
+    # SECURITY RISK: For demonstration purpose only
+    # headers["Content-Type"] = "text/plain"
+    # content
+
     # TODO: Handle when user don't provide one of the extension below
     redirect "/"
   end
@@ -106,6 +110,19 @@ post "/create" do
     redirect "/"
   end
 end
+
+# SECURITY RISK: For demonstration purpose only
+# Access: http://127.0.0.1:4567/view?filename=../users.yaml
+# get "/view" do
+#   file_path = File.join(data_path, params[:filename])
+
+#   if File.exist?(file_path)
+#     load_file_content(file_path)
+#   else
+#     session[:message] = "#{params[:filename]} does not exist."
+#     redirect "/"
+#   end
+# end
 
 get "/:filename" do
   file_path = File.join(data_path, params[:filename])
