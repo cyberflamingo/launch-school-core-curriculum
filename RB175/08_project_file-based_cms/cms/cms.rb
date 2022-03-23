@@ -1,3 +1,4 @@
+require "bcrypt"
 require "redcarpet"
 require "sinatra"
 require "sinatra/reloader" if development?
@@ -59,6 +60,17 @@ def load_user_credentials
                        # rubocop:enable Style/ExpandPathArguments
                      end
   YAML.load_file(credentials_path)
+end
+
+def valid_credentials?(username, password)
+  credentials = load_user_credentials
+
+  if credentials.key?(username)
+    bcrypt_password = BCrypt::Password.new(credentials[username])
+    bcrypt_password == password
+  else
+    false
+  end
 end
 
 get "/" do
@@ -140,23 +152,14 @@ post "/:filename/delete" do
 end
 
 get "/users/signin" do
-  credentials = load_user_credentials
-  username = params[:username]
-
-  if credentials.key?(username) && credentials[username] == params[:password]
-    session[:username] = username
-    session[:message] = "Welcome!"
-    redirect "/"
-  else
-    session[:message] = "Invalid credentials"
-    status 422
-    erb :signin
-  end
+  erb :signin
 end
 
 post "/users/signin" do
-  if params[:username] == "admin" && params[:password] == "secret"
-    session[:username] = params[:username]
+  username = params[:username]
+
+  if valid_credentials?(username, params[:password])
+    session[:username] = username
     session[:message] = "Welcome!"
     redirect "/"
   else
