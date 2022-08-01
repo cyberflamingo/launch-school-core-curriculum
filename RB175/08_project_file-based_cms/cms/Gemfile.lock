@@ -11,7 +11,7 @@ GEM
     parallel (1.22.0)
     parser (3.1.1.0)
       ast (~> 2.4.1)
-    rack (2.2.3)
+    rack (2.2.4)
     rack-protection (2.2.0)
       rack
     rack-test (1.1.0)
